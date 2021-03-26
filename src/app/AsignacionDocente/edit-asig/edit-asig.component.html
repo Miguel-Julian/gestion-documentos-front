@@ -4,26 +4,26 @@
             <h3>Editar Asignacion Docente</h3>
         </div>
         <div class="card-body">
-            <form action="">
-                <div class="form-group">
-                    <label for="">Docente:</label>
-                    <select class="form-control" [(ngModel)]="asignacionDocente.docente.idDocente" name="docente">
-                        <option value="0">--seleccione--</option>
-                        <option *ngFor="let docente of listaDocentes" value={{docente.idDocente}}>{{docente.nombreDocente}}</option>
-                      </select>
-                </div>
+            <form action="">                
                 <div class="form-group">
                     <label for="">Curso:</label>
-                    <select class="form-control" [(ngModel)]="asignacionDocente.curso.idCurso" name="curso">
+                    <select class="form-control"  disabled=»disabled» [(ngModel)]="asignacionDocente.curso.idCurso" name="curso">
                         <option value="0">--seleccione--</option>
                         <option *ngFor="let curso of listaCursos" value={{curso.idCurso}}>{{curso.nombreCurso}}</option>
                       </select>
                 </div>
                 <div class="form-group">
                     <label for="">Materia:</label>
-                    <select class="form-control" [(ngModel)]="asignacionDocente.materia.idMateria" name="materia">
+                    <select class="form-control"  disabled=»disabled» [(ngModel)]="asignacionDocente.materia.idMateria" name="materia">
                         <option value="0">--seleccione--</option>
                         <option *ngFor="let materia of listaMaterias" value={{materia.idMateria}}>{{materia.nombreMateria}}</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Docente:</label>
+                    <select class="form-control"  [(ngModel)]="asignacionDocente.docente.idDocente" name="docente">
+                        <option value="0">--seleccione--</option>
+                        <option *ngFor="let docente of listaDocentes" value={{docente.idDocente}}>{{docente.nombreDocente}} {{asignacionDocente.docente.apellidoDocente}}</option>
                       </select>
                 </div>
                 <button (click)="Actualizar(asignacionDocente)" class="btn btn-danger" id="btnRegistrar">Registrar</button>

@@ -59,7 +59,8 @@ export class AddAsigComponent implements OnInit {
   }
 
   Registrar(){
-    this.getNombreDocente(); 
+    this.getNombreDocente();
+    console.log(this.asignacionDocente.docente) ;
     this.getNombreCurso();  
     this.getNombreMateria();      
     this.service.save(this.asignacionDocente).subscribe(resultado=>{
