@@ -1,0 +1,61 @@
+<div class="">
+    <div class="card">
+        <div class="card-header">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                  <h4>Calificaciones</h4>
+                  <form class="form-inline">
+                    <button type="button" (click)="RegistrarCalificaciones()" class="btn btn-outline-success my-sm-0 mr-sm-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                          </svg>
+                    </button>
+                    <input class="form-control my-2 my-sm-0 mr-sm-3" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+              </nav>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th>ID</th>
+                        <th>NOMBRE CALIFICACION</th>
+                        <th>DESCRIPCION</th>
+                        <th>NOTA MINIMA</th>
+                        <th>NOTA MAXIMA</th>
+                        <th>NOTA APROBACION</th>
+                        <th>OPCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let calificacion of calificaciones
+                    | paginate: { itemsPerPage: 10, currentPage: pageActual }" class="text-center">
+                        <td>{{calificacion.idCalificacion}}</td>
+                        <td>{{calificacion.nombreCalificacion}}</td>
+                        <td>{{calificacion.descripcionCalificacion}}</td>
+                        <td>{{calificacion.notaMinima}}</td>
+                        <td>{{calificacion.notaMaxima}}</td>
+                        <td>{{calificacion.notaAprobacion}}</td>
+                        <td>
+                            <button (click)="EditarCalificacion(calificacion)" class="btn btn-outline-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                  </svg>
+                            </button>
+                            <button (click)="InactivarCalificacion(calificacion)" class="btn btn-outline-danger" style="margin-left: 10px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+        </div>
+    </div>
+</div>

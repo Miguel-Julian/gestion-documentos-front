@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Importar Archivos desde Excel</h3>
+        </div>
+        <div class="card-body">
+            <div>Puede importar sus registros mediante archivos de excel siguiendo como base la siguiente plantilla:
+                <a href="https://drive.google.com/drive/folders/19MDQipbtDddAH-7kCQu6sZenvY0gg18r?usp=sharing" target="_blank">Descargar plantilla aqui</a>.
+            </div>
+            <br>                         
+            <div class="text-center">
+                <label for="" >OPCIÓN:</label>
+                <select class="form-control"  [(ngModel)]="opcion" name="opcion">
+                    <option value="0">--seleccione--</option>
+                    <option value="1">Estudiante</option>
+                    <option value="2">Docente</option>
+                  </select>
+            </div>
+            <br>       
+            <table class="table table-hover">            
+                <tbody>                                                                                           
+                    <td WIDTH="50%">
+                        <tr>
+                            <div class="form-group">
+                                <input type="file" (change)="selectFile($event)"/>
+                                <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">Subir</button>
+                            </div> 
+                        </tr>   
+                        <tr>
+                            <div *ngIf="currentFile" class="progress my-3">
+                                <div class="progress-bar progress-bar-info progress-bar-striped"  role="progressbar"
+                                    attr.aria-valuenow="{{ progress }}" aria-valuemin="0"  aria-valuemax="100"
+                                    [ngStyle]="{ width: progress + '%' }"
+                                >{{ progress }}%
+                                </div>
+                            </div>
+                        </tr>    
+                        <tr><div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div></tr>                    
+                    </td> 
+                    <td>                                       
+                        <div class="card">
+                            <div class="card-body">
+                                <tr><b>Consideracions</b></tr>
+                                <br>
+                                <tr>Para poder importar sus Estudiantes o Docentes correctamente, 
+                                    asegúrese de cumplir las siguientes consideraciones en el archivo Excel:
+                                    <ul>
+                                        <li>No elimine, ni cambie el orden de ninguna columna y el nombre del libro</li>
+                                        <li>No puede haber Estudiantes o Docentes con el mismo número de identificación</li>
+                                        <li>El Tipo de DNI debe ser alguno de los siguientes:
+                                            <br>
+                                            -  Registro Civil<br>
+                                            -  Tarjeta de Identidad<br>
+                                            -  Cedula de Ciudadania<br>
+                                            -  Cedula de extranjeria<br>
+                                        </li>
+                                        <li>El Curso debe ser alguno de los existentes en la sección Curso</li>
+                                    </ul>
+                                </tr>
+                            </div>
+                        </div>
+                    </td>                                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="container col-md-8">
+    <div class="card">
+        <div class="card-header">
+            <h3>Editar Estudiante</h3>
+        </div>
+        <div class="card-body">
+            <form action="">
+                <div class="form-group">
+                    <label for="">DNI:</label>
+                    <input [(ngModel)]="estudiante.dniEstudiante" name="dniEstudiante" type="number"
+                        class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Tipo de Documento:</label>
+                    <select class="form-control" [(ngModel)]="estudiante.tipoDocumento.idTipoDocumento"
+                        name="tipoDocumento">
+                        <option value="0">--seleccione--</option>
+                        <option *ngFor="let tipoDocumento of ListaTipoDocumento"
+                            value={{tipoDocumento.idTipoDocumento}}>{{tipoDocumento.nombreTipoDocumento}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Nombre:</label>
+                    <input [(ngModel)]="estudiante.nombreEstudiante" name="nombreEstudiante" type="text"
+                        class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Apellido:</label>
+                    <input [(ngModel)]="estudiante.apellidoEstudiante" name="apellidoEstudiante" type="text"
+                        class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Telefono:</label>
+                    <input [(ngModel)]="estudiante.telefonoEstudiante" name="telefonoEstudiante" type="text"
+                        class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Correo:</label>
+                    <input [(ngModel)]="estudiante.correoEstudiante" name="correoEstudiante" type="email"
+                        class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Fecha de Nacimiento:</label>
+                    <input [(ngModel)]="estudiante.fechaNacimientoEstudiante" name="fechaNacimientoEstudiante"
+                        type="date" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Ciudad:</label>
+                    <input [(ngModel)]="estudiante.ciudadEstudiante" name="ciudadEstudiante" type="text"
+                        class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Curso:</label>
+                    <select class="form-control" [(ngModel)]="estudiante.curso.idCurso" name="curso">
+                        <option value="0">--seleccione--</option>
+                        <option *ngFor="let curso of ListaCursos" value={{curso.idCurso}}>{{curso.nombreCurso}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select name="select" class="form-control" [(ngModel)]="estudiante.estado" name="estado">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
+                </div>
+                <button (click)="Actualizar(estudiante)" class="btn btn-danger">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>

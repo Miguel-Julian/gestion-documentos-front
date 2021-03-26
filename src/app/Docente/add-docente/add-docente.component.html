@@ -1,0 +1,77 @@
+<div class="container col-md-8">
+    <div class="card">
+        <div class="card-header">
+            <h3>Registrar Docentes</h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-success" *ngIf="!hide">{{message}}</div>
+            <form action="">
+                <div class="form-group">
+                    <label for="">Numero de Documento:</label>
+                    <input [(ngModel)]="docente.dniDocente" name="dniDocente"
+                        type="text" class="form-control">
+                    <small class="form-text text-danger" id="dniDocenteError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="">Tipo de Documento:</label>
+                    <select class="form-control" [(ngModel)]="docente.tipoDocumento.idTipoDocumento"
+                        name="tipoDocumento">
+                        <option value="0">--seleccione--</option>
+                        <option *ngFor="let tipoDocumento of ListaTipoDocumento"
+                            value={{tipoDocumento.idTipoDocumento}}>{{tipoDocumento.nombreTipoDocumento}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre(s):</label>
+                    <input [(ngModel)]="docente.nombreDocente" name="nombreDocente" type="text" class="form-control">
+                    <small class="form-text text-danger" id="nombreDocenteError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="">Apellidos:</label>
+                    <input [(ngModel)]="docente.apellidoDocente" name="apellidoDocente" type="text"
+                        class="form-control">
+                    <small class="form-text text-danger" id="apellidoDocenteError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="">Telefono:</label>
+                    <input [(ngModel)]="docente.telefonoDocente" name="telefonoDocente" type="text"
+                        class="form-control">
+                    <small class="form-text text-danger" id="telefonoDocenteError"></small>
+                </div>
+                <!--
+                <div class="form-group">
+                    <label for="">Nombre de Usuario:</label>
+                    <input [(ngModel)]="usuario.nombreUsuario" [(ngModel)]="docente.usuario.nombreUsuario"
+                        name="nombreUsuario" type="text" class="form-control">
+                    <small class="form-text text-danger" id="correoDocenteError"></small>
+                </div>
+                -->
+                <div class="form-group">
+                    <label for="">Correo Electrónico:</label>
+                    <input [(ngModel)]="docente.correoDocente" name="correoDocente" type="email" class="form-control">
+                    <small class="form-text text-danger" id="correoDocenteError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="">Fecha de Nacimiento:</label>
+                    <input [(ngModel)]="docente.fechaNacimientoDocente" name="fechaNacimientoDocente" type="date"
+                        class="form-control">
+                    <small class="form-text text-danger" id="fechaNacimientoDocenteError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="">Ciudad:</label>
+                    <input [(ngModel)]="docente.ciudadDocente" name="ciudadDocente" type="text" class="form-control">
+                    <small class="form-text text-danger" id="ciudadDocenteError"></small>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" [(ngModel)]="docente.estado" [(ngModel)]="usuario.estado"
+                        name="estado">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
+                </div>
+
+                <button (click)="Registrar()" class="btn btn-danger" id="btnRegistrar">Registrar</button>
+            </form>
+        </div>
+    </div>
+</div>
