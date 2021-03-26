@@ -8,16 +8,16 @@
             <form action="">                
                 <div class="form-group">
                     <label for="">Curso:</label>
-                    <select class="form-control" [(ngModel)]="asignacionDocente.curso.idCurso" name="curso">
+                    <select class="form-control" [(ngModel)]="asignacionDocente.curso.idCurso" (ngModelChange)="obtenerListaMateriasPorCurso($event)" name="curso">
                         <option value="0">--seleccione--</option>
                         <option *ngFor="let curso of listaCursos" value={{curso.idCurso}}>{{curso.nombreCurso}}</option>
                       </select>
                 </div>
                 <div class="form-group">
                     <label for="">Materia:</label>
-                    <select class="form-control" [(ngModel)]="asignacionDocente.materia.idMateria" name="materia">
+                    <select class="form-control" [(ngModel)]="asignacionDocente.materia.idMateria"  (ngModelChange)="obtenerListaMateriasPorCurso($event)" name="materia">
                         <option value="0">--seleccione--</option>
-                        <option *ngFor="let materia of listaMaterias" value={{materia.idMateria}}>{{materia.nombreMateria}}</option>
+                        <option *ngFor="let materia of listaMaterias3" value={{materia.idMateria}}>{{materia.nombreMateria}}</option>
                       </select>
                 </div>                
                 <div class="form-group">
