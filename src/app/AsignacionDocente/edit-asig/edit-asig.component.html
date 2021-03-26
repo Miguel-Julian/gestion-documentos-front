@@ -23,10 +23,10 @@
                     <label for="">Docente:</label>
                     <select class="form-control"  [(ngModel)]="asignacionDocente.docente.idDocente" name="docente">
                         <option value="0">--seleccione--</option>
-                        <option *ngFor="let docente of listaDocentes" value={{docente.idDocente}}>{{docente.nombreDocente}} {{asignacionDocente.docente.apellidoDocente}}</option>
+                        <option *ngFor="let docente of listaDocentes" value={{docente.idDocente}}>{{docente.nombreDocente}} {{docente.apellidoDocente}}</option>
                       </select>
                 </div>
-                <button (click)="Actualizar(asignacionDocente)" class="btn btn-danger" id="btnRegistrar">Registrar</button>
+                <button (click)="Actualizar(asignacionDocente)" class="btn btn-danger" id="btnRegistrar">Actualizar</button>
             </form>
         </div>
     </div>
