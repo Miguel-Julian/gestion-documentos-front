@@ -1,5 +1,5 @@
-import { Component, OnInit,} from '@angular/core';
-import { ImportExcelService }  from 'src/app/Service/import-excel.service';
+import { Component, OnInit, } from '@angular/core';
+import { ImportExcelService } from 'src/app/Service/import-excel.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
@@ -10,22 +10,25 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 
 export class ImportExcelComponent implements OnInit {
-    
+
   constructor(private importExcelService: ImportExcelService) { }
-  
+
   selectedFiles?: FileList;
-  currentFile?: File;  
+  currentFile?: File;
   progress = 0;
   message = '';
-  opcion =0;
+  alert='';
+  opcion = 0;
 
   ngOnInit(): void {
-  
+
   }
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
+
+
   upload(): void {
     this.progress = 0;
   
@@ -42,10 +45,22 @@ export class ImportExcelComponent implements OnInit {
             } else if (event instanceof HttpResponse) {
               this.message = event.body.message;              
             }
-            this.message = "Archivo enviado";
+            console.log(event.body)
+            this.alert = event.body+"";
+            if(this.alert  == "!Subió el archivo con éxito!"){
+              this.message = this.alert;
+            }            
+            if(this.alert.charAt(0) == 'E'){
+              alert(this.alert);              
+              window.location.reload();
+            }
+            if(this.alert.charAt(0) == 'N'){
+              alert(this.alert);              
+              window.location.reload();
+            }                                                                                  
           });
       }
-      this.selectedFiles = undefined;
+      this.selectedFiles = undefined;           
     }
   }
 }

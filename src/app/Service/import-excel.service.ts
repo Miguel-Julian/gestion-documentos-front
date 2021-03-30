@@ -10,7 +10,7 @@ export class ImportExcelService {
   private url: string = "";
 
   constructor(private http: HttpClient) { }
-  
+
    //Metodo que envia los archivos al endpoint /upload 
    upload(file: File, opcion:number): Observable<HttpEvent<any>>{
     const formData: FormData = new FormData();
@@ -26,6 +26,7 @@ export class ImportExcelService {
       responseType: 'json'
     });
     return this.http.request(req);
+    
   }
 
 }
