@@ -28,6 +28,11 @@ import { ListarAsigComponent } from './AsignacionDocente/listar-asig/listar-asig
 import { FilterPipe } from './pipe/filter.pipe';
 import { ImportExcelComponent } from './import-excel/import-excel.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './auth/login.component';
+import { IndexComponent } from './index/index.component';
+import { MenuComponent } from './menu/menu.component';
+import { interceptorProvider } from './Service/interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +56,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EditAsigComponent,
     ListarAsigComponent,
     FilterPipe,
-    ImportExcelComponent
+    ImportExcelComponent,
+    LoginComponent,    
+    IndexComponent, MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +68,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxPaginationModule,
     NgbModule
   ],
-  providers: [CursoService],
+  providers: [CursoService,interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

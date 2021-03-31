@@ -5,6 +5,7 @@ import { Docente } from 'src/app/Modelo/docente';
 import { TipoDocumento } from 'src/app/Modelo/tipo-documento';
 import { DocenteService } from 'src/app/Service/docente.service';
 import { TipoDocumentoService } from 'src/app/Service/tipo-documento.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-edit-docente',
@@ -15,13 +16,19 @@ export class EditDocenteComponent implements OnInit {
 
   docente: Docente = new Docente();
   ListaTipoDocumento: TipoDocumento[]=[];
+  isLogged = false; 
 
   constructor(private router: Router, private service:DocenteService,
-    private TipoDocumentoService:TipoDocumentoService) { }
+    private TipoDocumentoService:TipoDocumentoService,private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.Editar();
     this.TipoDocumentoService.listar().subscribe(res=>{this.ListaTipoDocumento=res});
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   getNombreTipoDocumento(){

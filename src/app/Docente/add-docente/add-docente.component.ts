@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/Modelo/usuario';
 import { DocenteService } from 'src/app/Service/docente.service';
 import { TipoDocumentoService } from 'src/app/Service/tipo-documento.service';
 import { UsuarioService } from 'src/app/Service/usuario.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-add-docente',
@@ -21,15 +22,21 @@ export class AddDocenteComponent implements OnInit {
   message: string = "";
   ListaTipoDocumento: TipoDocumento[] = [];
   usuarios: Usuario[] = [];
+  isLogged = false; 
 
   constructor(private router: Router, private service: DocenteService,
-    private TipoDocumentoService: TipoDocumentoService, private usuarioService: UsuarioService) { }
+    private TipoDocumentoService: TipoDocumentoService, private usuarioService: UsuarioService,private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.TipoDocumentoService.listar().subscribe(res => { this.ListaTipoDocumento = res });
     this.service.listar().subscribe(data => {
       this.docentes = data;
     });
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   getNombreTipoDocumento() {

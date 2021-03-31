@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Materia } from 'src/app/Modelo/materia';
 import { MateriaService } from 'src/app/Service/materia.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-edit-materia',
@@ -11,10 +12,17 @@ import { MateriaService } from 'src/app/Service/materia.service';
 export class EditMateriaComponent implements OnInit {
 
   materia: Materia = new Materia();
-  constructor(private router: Router, private service:MateriaService) { }
+  isLogged = false; 
+  
+  constructor(private router: Router, private service:MateriaService,private tokenService:TokenService) { }
   
   ngOnInit(): void {
     this.Editar();
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   Editar() {

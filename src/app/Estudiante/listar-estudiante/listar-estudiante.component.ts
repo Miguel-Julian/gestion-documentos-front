@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Estudiante } from 'src/app/Modelo/estudiante';
 import { EstudianteService } from 'src/app/Service/estudiante.service';
 import { NgbModal  } from '@ng-bootstrap/ng-bootstrap';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-listar',
@@ -15,8 +16,9 @@ export class ListarEstudianteComponent implements OnInit {
   pageActual: number = 1;
   filterEstudiante = '';
   estudianteModal: Estudiante = new Estudiante;
+  isLogged = false; 
 
-  constructor(private service:EstudianteService, private router: Router,private modalService: NgbModal) { 
+  constructor(private service:EstudianteService, private router: Router,private modalService: NgbModal,private tokenService:TokenService) { 
     this.estudiantes = [];
   }
 
@@ -24,10 +26,16 @@ export class ListarEstudianteComponent implements OnInit {
     this.service.listar().subscribe(data =>{
       this.estudiantes=data;
     });
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   open(content:any,estudiante:Estudiante) {
     this.modalService.open(content);
+    estudiante.usuario.contrasenia = estudiante.dniEstudiante.toString();
     this.estudianteModal = estudiante;    
   }
 

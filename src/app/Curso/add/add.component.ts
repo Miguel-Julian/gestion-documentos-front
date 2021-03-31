@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Curso } from 'src/app/Modelo/curso';
 import { CursoService } from 'src/app/Service/curso.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-add',
@@ -13,10 +14,16 @@ export class AddComponent implements OnInit {
   curso: Curso = new Curso;
   hide: boolean = true;
   message: string = "";
+  isLogged = false; 
 
-  constructor(private router:Router, private service:CursoService) { }
+  constructor(private router:Router, private service:CursoService,private tokenService:TokenService) { }
 
   ngOnInit(): void {
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   Registrar(){

@@ -4,6 +4,7 @@ import { AsignacionDocente } from 'src/app/Modelo/asignacion-docente';
 import { Docente } from 'src/app/Modelo/docente';
 import { AsignacionDocenteService } from 'src/app/Service/asignacion-docente.service';
 import { DocenteService } from 'src/app/Service/docente.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-listar-docente',
@@ -15,14 +16,20 @@ export class ListarDocenteComponent implements OnInit {
   docentes: Docente[]=[];
   pageActual: number = 1;
   asignacionDocente: AsignacionDocente[]=[];
+  isLogged = false; 
 
   constructor(private router:Router, private service:DocenteService, 
-    private asignacionService: AsignacionDocenteService) { }
+    private asignacionService: AsignacionDocenteService,private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.service.listar().subscribe(data=>{
       this.docentes = data;
     });
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   RegistrarDocente(){

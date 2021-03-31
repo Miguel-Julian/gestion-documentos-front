@@ -7,6 +7,7 @@ import { Curso } from 'src/app/Modelo/curso';
 import { TipoDocumento } from 'src/app/Modelo/tipo-documento';
 import { TipoDocumentoService } from 'src/app/Service/tipo-documento.service';
 import { Usuario } from 'src/app/Modelo/usuario';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-add-Estudiante',
@@ -22,9 +23,10 @@ export class AddEstudianteComponent implements OnInit {
   message: string = "";
   ListaCursos: Curso[]=[];
   ListaTipoDocumento: TipoDocumento[]=[];
+  isLogged = false; 
 
   constructor(private router:Router, private service:EstudianteService,private Cursoservice:CursoService,
-    private TipoDocumentoService:TipoDocumentoService) { }
+    private TipoDocumentoService:TipoDocumentoService,private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.Cursoservice.listar().subscribe(res=>{this.ListaCursos=res})
@@ -32,6 +34,11 @@ export class AddEstudianteComponent implements OnInit {
     this.service.listar().subscribe(data => {
       this.estudiantes = data;
     });
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   getNombreCurso() {    
