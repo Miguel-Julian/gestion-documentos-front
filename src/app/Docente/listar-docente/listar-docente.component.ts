@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AsignacionDocente } from 'src/app/Modelo/asignacion-docente';
@@ -24,14 +25,14 @@ export class ListarDocenteComponent implements OnInit {
   ngOnInit(): void {
     this.service.listar().subscribe(data=>{
       this.docentes = data;
-    });
+    });    
     if (this.tokenService.getToken()) {
       this.isLogged = true;     
     }else{
       this.isLogged = false;      
     }
   }
-
+  
   RegistrarDocente(){
     this.router.navigate(["addDocente"]);
   }

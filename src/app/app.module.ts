@@ -32,6 +32,8 @@ import { LoginComponent } from './auth/login.component';
 import { IndexComponent } from './index/index.component';
 import { MenuComponent } from './menu/menu.component';
 import { interceptorProvider } from './Service/interceptor.service';
+import { AddDocDocenteComponent } from './DocumentosDocente/add-doc-docente/add-doc-docente.component';
+import { ListarDocDocenteComponent } from './DocumentosDocente/listar-doc-docente/listar-doc-docente.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { interceptorProvider } from './Service/interceptor.service';
     FilterPipe,
     ImportExcelComponent,
     LoginComponent,    
-    IndexComponent, MenuComponent
+    IndexComponent, 
+    MenuComponent, 
+    AddDocDocenteComponent, ListarDocDocenteComponent
   ],
   imports: [
     BrowserModule,

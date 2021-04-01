@@ -28,6 +28,11 @@ export class AsignacionDocenteService {
     return this.http.get<AsignacionDocente[]>(this.url);
   }
 
+  public listarPorDocente (id:number){
+    this.url = "http://localhost:8090/asignacion/listarPorDocente";
+    return this.http.get<AsignacionDocente[]>(this.url+"/"+id);
+  }
+
   getAsignacionId(id:number){
     this.url = "http://localhost:8090/asignacion/consultar"
     return this.http.get<AsignacionDocente>(this.url+"/"+id);

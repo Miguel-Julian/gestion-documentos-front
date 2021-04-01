@@ -27,11 +27,6 @@ export class DocenteService {
     return this.http.get<Docente>(this.url+"/"+id);
   }
 
-  updateDocente(docente:Docente){
-    this.url = "http://localhost:8090/docente"
-    return this.http.put<Docente>(this.url+"/"+docente.idDocente, docente);
-  }
-
   public consultar(id: string): Observable<Docente>{
     this.url = "http://localhost:8090/docente/consultar/".concat(id);
     return this.http.get<Docente>(this.url);
