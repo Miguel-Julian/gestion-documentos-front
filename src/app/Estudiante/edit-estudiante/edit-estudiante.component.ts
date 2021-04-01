@@ -7,6 +7,7 @@ import { CursoService } from 'src/app/Service/curso.service';
 import { Curso } from 'src/app/Modelo/curso';
 import { TipoDocumento } from 'src/app/Modelo/tipo-documento';
 import { TipoDocumentoService } from 'src/app/Service/tipo-documento.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-edit-Estudiante',
@@ -18,13 +19,20 @@ export class EditEstudianteComponent implements OnInit {
   estudiante: Estudiante = new Estudiante();
   ListaCursos: Curso[] = [];
   ListaTipoDocumento: TipoDocumento[]=[];
+  isLogged = false; 
+  
   constructor(private router: Router, private service: EstudianteService, 
-    private Cursoservice: CursoService, private tipoDocumentoService: TipoDocumentoService) { }
+    private Cursoservice: CursoService, private tipoDocumentoService: TipoDocumentoService,private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.Editar();
     this.Cursoservice.listar().subscribe(res => { this.ListaCursos = res });
     this.tipoDocumentoService.listar().subscribe(res=>{this.ListaTipoDocumento=res});
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
   
   getNombreCurso() {

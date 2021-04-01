@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AsignacionDocente } from 'src/app/Modelo/asignacion-docente';
 import { AsignacionDocenteService } from 'src/app/Service/asignacion-docente.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-listar-asig',
@@ -12,13 +13,19 @@ export class ListarAsigComponent implements OnInit {
 
   asignacionDocentes: AsignacionDocente[]=[]
   pageActual: number = 1;
+  isLogged = false;
 
-  constructor(private router:Router, private service:AsignacionDocenteService) { } 
+  constructor(private router:Router, private service:AsignacionDocenteService, private tokenService: TokenService) { } 
 
   ngOnInit(): void {
     this.service.listar().subscribe(data=>{
       this.asignacionDocentes = data;
     });
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   Asignacion(){

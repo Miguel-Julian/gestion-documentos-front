@@ -1,0 +1,47 @@
+<app-menu></app-menu>
+<div class="container" *ngIf="isLogged">
+    <div class="container">
+        <table class="table table-hover">
+            <tbody>
+                <td WIDTH="50%">
+                    <div *ngFor="let curso of cursos">
+                        <div class="card" (click)="matetiasOfCurso(curso)">
+                            <div class="card-header">
+                                <nav class="navbar navbar-light bg-light">
+                                    <div class="container-fluid">
+                                        <h4>{{curso.nombreCurso}}</h4>
+                                    </div>
+                                </nav>
+                            </div>                           
+                        </div>
+                        <br>
+                    </div>
+                </td>
+                <td>
+                    <div *ngFor="let materia of materias">
+                        <div class="card" (click)="add(materia)">
+                            <div class="card-header">
+                                <nav class="navbar navbar-light bg-light">
+                                    <div class="container-fluid">
+                                        <h4>{{materia.nombreMateria}}</h4>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead class="thead-light">
+                                        <tr class="text-center">
+                                            <th>Curso: </th>
+                                            <th>{{asignacionDocente.curso.nombreCurso}}</th>                                            
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </td>
+            </tbody>
+        </table>
+    </div>
+</div>

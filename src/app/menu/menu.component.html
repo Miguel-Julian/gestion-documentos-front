@@ -1,0 +1,31 @@
+<div>
+    <nav class="navegacion">
+        <!--Menu ADMIN -->
+        <ul class="menu" *ngIf="isLogged && roles[0]=='ROLE_ADMIN'">
+            <li><a routerLink="/index">Inicio</a></li>
+            <li><a routerLink="/listarEstudiantes">Estudiantes</a></li>
+            <li><a routerLink="/listarDocentes">Docentes</a></li>
+            <li><a routerLink="/listarMaterias">Materias</a></li>
+            <li><a routerLink="/listarCursos">Cursos</a></li>
+            <li><a routerLink="/listarCalificaciones">Calificaciones</a></li>
+            <li><a routerLink="/import">Importacion</a></li>
+            <li><a class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
+        </ul>
+        <!--Menu DOCENTE -->
+        <ul class="menu" *ngIf="isLogged && roles[0]=='ROLE_DOCENTE'">
+            <li><a routerLink="/index">Inicio</a></li>
+            <li><a routerLink="/listarDocDocente">Trabajos</a></li>
+            <li><a (click)="onLogOut()"> Cerrar Sesión</a></li>
+        </ul>
+        <!--Menu ESTUDIANTE-->
+        <ul class="menu" *ngIf="isLogged && roles[0]=='ROLE_ESTUDIANTE'">
+            <li><a routerLink="/index">Inicio</a></li>
+            <li><a class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
+        </ul>
+        <!--Menu SIN LOGEARSE -->
+        <ul class="menu" *ngIf="!isLogged">
+            <li><a class="LogOut" routerLink="/login">Iniciar Sesión</a></li>
+        </ul>
+
+    </nav><br>
+</div>

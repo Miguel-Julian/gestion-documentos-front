@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Curso } from 'src/app/Modelo/curso';
 import { CursoService } from 'src/app/Service/curso.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-listar',
@@ -12,8 +13,9 @@ export class ListarComponent implements OnInit {
 
   cursos: Curso[];
   pageActual: number = 1;
+  isLogged = false; 
 
-  constructor(private service:CursoService, private router: Router) { 
+  constructor(private service:CursoService, private router: Router,private tokenService:TokenService) { 
     this.cursos = [];
   }
 
@@ -21,6 +23,11 @@ export class ListarComponent implements OnInit {
     this.service.listar().subscribe(data =>{
       this.cursos=data;
     });
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   RegistrarCursos(){

@@ -9,6 +9,7 @@ import { AsignacionDocenteService } from 'src/app/Service/asignacion-docente.ser
 import { CursoService } from 'src/app/Service/curso.service';
 import { DocenteService } from 'src/app/Service/docente.service';
 import { MateriaService } from 'src/app/Service/materia.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-add-asig',
@@ -26,16 +27,22 @@ export class AddAsigComponent implements OnInit {
   listaMaterias: Materia[] = [];
   listaMaterias2: Materia[] = [];
   listaMaterias3: Materia[] = [];
+  isLogged = false;
 
   constructor(private router: Router, private service: AsignacionDocenteService,
     private cursoService: CursoService, private docenteService: DocenteService,
-    private materiaService: MateriaService) { }
+    private materiaService: MateriaService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.docenteService.listar().subscribe(res => { this.listaDocentes = res });
     this.cursoService.listar().subscribe(res => { this.listaCursos = res });
     this.materiaService.listar().subscribe(res => { this.listaMaterias = res });
     this.service.listar().subscribe(data => { this.asignacionDocentes = data; });
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   obtenerListaMateriasPorCurso(event: any): void {

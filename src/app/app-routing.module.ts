@@ -19,8 +19,16 @@ import { AddMateriaComponent } from './Materia/add-materia/add-materia.component
 import { EditMateriaComponent } from './Materia/edit-materia/edit-materia.component';
 import { ListarMateriaComponent } from './Materia/listar-materia/listar-materia.component';
 import { ImportExcelComponent } from './import-excel/import-excel.component';
+import { IndexComponent } from './index/index.component';
+import { LoginComponent } from './auth/login.component';
+import { AddDocDocenteComponent } from './DocumentosDocente/add-doc-docente/add-doc-docente.component';
+import { ListarDocDocenteComponent } from './DocumentosDocente/listar-doc-docente/listar-doc-docente.component';
 
 const routes: Routes = [
+  {path: 'listarDocDocente', component:ListarDocDocenteComponent},
+  {path: 'addDocDocente', component:AddDocDocenteComponent},
+  {path: 'index', component:IndexComponent},
+  {path: 'login', component:LoginComponent},
   {path:'listarCursos', component:ListarComponent},
   {path:'addCurso', component:AddComponent},
   {path:'editCurso', component:EditComponent},

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Materia } from 'src/app/Modelo/materia';
 import { MateriaService } from 'src/app/Service/materia.service';
 import { NgbModal  } from '@ng-bootstrap/ng-bootstrap';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-listar-materia',
@@ -15,13 +16,19 @@ export class ListarMateriaComponent implements OnInit {
   materias:Materia[]=[]
   pageActual: number = 1;
   materiaModal:Materia = new Materia();
+  isLogged = false; 
   
-  constructor(private service:MateriaService, private router:Router,private modalService: NgbModal) {  }
-
+  constructor(private service:MateriaService, private router:Router,private modalService: NgbModal,private tokenService:TokenService) {  }
+  
   ngOnInit(): void {
     this.service.listar().subscribe(data=>{
       this.materias = data;
     });
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   open(content:any,materia:Materia) {

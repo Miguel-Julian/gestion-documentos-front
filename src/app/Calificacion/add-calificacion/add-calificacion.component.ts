@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Calificacion } from 'src/app/Modelo/calificacion';
 import { CalificacionService } from 'src/app/Service/calificacion.service';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-add-Calificacion',
@@ -13,10 +14,16 @@ export class AddCalificacionComponent implements OnInit {
   calificacion: Calificacion = new Calificacion;
   hide: boolean = true;
   message: string = "";
+  isLogged = false; 
 
-  constructor(private router:Router, private service:CalificacionService) { }
+  constructor(private router:Router, private service:CalificacionService,private tokenService:TokenService) { }
 
   ngOnInit(): void {
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   Registrar(){

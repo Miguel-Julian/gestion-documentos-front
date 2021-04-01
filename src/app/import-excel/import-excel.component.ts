@@ -1,6 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { ImportExcelService } from 'src/app/Service/import-excel.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { TokenService } from 'src/app/Service/token.service';
 
 @Component({
   selector: 'app-import-excel',
@@ -11,7 +12,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 export class ImportExcelComponent implements OnInit {
 
-  constructor(private importExcelService: ImportExcelService) { }
+  constructor(private importExcelService: ImportExcelService,private tokenService:TokenService) { }
 
   selectedFiles?: FileList;
   currentFile?: File;
@@ -19,9 +20,14 @@ export class ImportExcelComponent implements OnInit {
   message = '';
   alert='';
   opcion = 0;
+  isLogged = false; 
 
   ngOnInit(): void {
-
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;     
+    }else{
+      this.isLogged = false;      
+    }
   }
 
   selectFile(event: any): void {
