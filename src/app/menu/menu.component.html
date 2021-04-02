@@ -13,8 +13,7 @@
         </ul>
         <!--Menu DOCENTE -->
         <ul class="menu" *ngIf="isLogged && roles[0]=='ROLE_DOCENTE'">
-            <li><a routerLink="/index">Inicio</a></li>
-            <li><a routerLink="/listarDocDocente">Trabajos</a></li>
+            <li><a routerLink="/index">Inicio</a></li>            
             <li><a (click)="onLogOut()"> Cerrar Sesión</a></li>
         </ul>
         <!--Menu ESTUDIANTE-->

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AddAsigComponent } from './AsignacionDocente/add-asig/add-asig.component';
 import { EditAsigComponent } from './AsignacionDocente/edit-asig/edit-asig.component';
 import { ListarAsigComponent } from './AsignacionDocente/listar-asig/listar-asig.component';
@@ -21,33 +22,33 @@ import { ListarMateriaComponent } from './Materia/listar-materia/listar-materia.
 import { ImportExcelComponent } from './import-excel/import-excel.component';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './auth/login.component';
-import { AddDocDocenteComponent } from './DocumentosDocente/add-doc-docente/add-doc-docente.component';
-import { ListarDocDocenteComponent } from './DocumentosDocente/listar-doc-docente/listar-doc-docente.component';
+import { AddDocDocenteComponent } from './Documentos/add-doc-docente/add-doc-docente.component';
+import { TemaComponent } from './tema/tema.component';
 
 const routes: Routes = [
-  {path: 'listarDocDocente', component:ListarDocDocenteComponent},
-  {path: 'addDocDocente', component:AddDocDocenteComponent},
-  {path: 'index', component:IndexComponent},
-  {path: 'login', component:LoginComponent},
-  {path:'listarCursos', component:ListarComponent},
-  {path:'addCurso', component:AddComponent},
-  {path:'editCurso', component:EditComponent},
-  {path:'listarMaterias', component:ListarMateriaComponent},
-  {path:'addMateria', component:AddMateriaComponent},
-  {path:'editMateria', component:EditMateriaComponent},
-  {path:'listarDocentes', component:ListarDocenteComponent},
-  {path:'addDocente', component:AddDocenteComponent},
-  {path:'editDocente', component:EditDocenteComponent},
-  {path:'listarCalificaciones', component:ListarCalificacionComponent},
-  {path:'addCalificacion', component:AddCalificacionComponent},
-  {path:'editCalificacion', component:EditCalificacionComponent},
-  {path:'listarEstudiantes', component:ListarEstudianteComponent},
-  {path:'addEstudiante', component:AddEstudianteComponent},
-  {path:'editEstudiante', component:EditEstudianteComponent},
-  {path:'listarAsignacionDocente', component:ListarAsigComponent},
-  {path:'addAsignacionDocente', component:AddAsigComponent},
-  {path:'editAsignacionDocente', component:EditAsigComponent},
-  {path:'import', component:ImportExcelComponent}
+  { path: 'tema', component: TemaComponent },
+  { path: 'addDocDocente', component: AddDocDocenteComponent },
+  { path: 'index', component: IndexComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'listarCursos', component: ListarComponent },
+  { path: 'addCurso', component: AddComponent },
+  { path: 'editCurso', component: EditComponent },
+  { path: 'listarMaterias', component: ListarMateriaComponent },
+  { path: 'addMateria', component: AddMateriaComponent },
+  { path: 'editMateria', component: EditMateriaComponent },
+  { path: 'listarDocentes', component: ListarDocenteComponent },
+  { path: 'addDocente', component: AddDocenteComponent },
+  { path: 'editDocente', component: EditDocenteComponent },
+  { path: 'listarCalificaciones', component: ListarCalificacionComponent },
+  { path: 'addCalificacion', component: AddCalificacionComponent },
+  { path: 'editCalificacion', component: EditCalificacionComponent },
+  { path: 'listarEstudiantes', component: ListarEstudianteComponent },
+  { path: 'addEstudiante', component: AddEstudianteComponent },
+  { path: 'editEstudiante', component: EditEstudianteComponent },
+  { path: 'listarAsignacionDocente', component: ListarAsigComponent },
+  { path: 'addAsignacionDocente', component: AddAsigComponent },
+  { path: 'editAsignacionDocente', component: EditAsigComponent },
+  { path: 'import', component: ImportExcelComponent }
 ];
 
 @NgModule({

@@ -1,10 +1,9 @@
-import { Timestamp } from "rxjs";
-import { AsignacionDocente } from "./asignacion-docente";
 import { Calificacion } from "./calificacion";
+import { Tema } from "./tema";
 
 export class DocumentosDocente {
     idDocumentosDocente: number = 0;
-    asignacionDocente: AsignacionDocente = new AsignacionDocente();
+    tema:Tema = new Tema();
     calificacion : Calificacion = new Calificacion();
     tipoActividad : string = '';
     descripcionActividad : string = '';
