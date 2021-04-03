@@ -1,0 +1,22 @@
+
+#Inactivos{    
+    background:#F2E6D8; 
+    cursor: pointer;
+}
+
+#activos{
+    background:#94b7df; 
+    cursor: pointer;
+}
+
+#activosEditar{
+    background:#94b7df;     
+}
+
+#contenedor{
+    background:#ffffff;   
+    display: inline-block;
+    min-width: 10px;
+  }
+
+  

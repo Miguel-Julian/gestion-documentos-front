@@ -20,6 +20,7 @@ export class TokenService {
     var a: any = sessionStorage.getItem(TOKEN_KEY)
     return a;
   }
+
   public setUsertName(userName: string): void {
     window.sessionStorage.removeItem(USERNAME_KEY);
     window.sessionStorage.setItem(USERNAME_KEY, userName);

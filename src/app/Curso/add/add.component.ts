@@ -38,8 +38,7 @@ export class AddComponent implements OnInit {
         this.hide=false;
         this.message = resultado[0];
         document.getElementById("btnRegistrar")?.setAttribute("disabled", "true");
-        setTimeout(()=>{
-          
+        setTimeout(()=>{          
           this.router.navigate(["/listarCursos"]);
         }, 2000);
       }

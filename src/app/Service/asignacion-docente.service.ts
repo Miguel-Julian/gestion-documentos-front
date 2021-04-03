@@ -16,11 +16,6 @@ export class AsignacionDocenteService {
   public save (asignacionDocente: AsignacionDocente): Observable<string[]>{
     this.url = "http://localhost:8090/asignacion/registrar";
     return this.http.post<string[]>(this.url, asignacionDocente);
-
-    /*
-    this.url = "http://localhost:8090/asignacion/registrar";
-    return this.http.post<string[]>(this.url, asignacionDocente);
-    */
   }
 
   public listar (){
@@ -33,19 +28,9 @@ export class AsignacionDocenteService {
     return this.http.get<AsignacionDocente[]>(this.url+"/"+id);
   }
 
-  getAsignacionId(id:number){
-    this.url = "http://localhost:8090/asignacion/consultar"
-    return this.http.get<AsignacionDocente>(this.url+"/"+id);
-  }
-
-  updateAsignacion(asignacionDocente: AsignacionDocente){
-    this.url = "http://localhost:8090/asignacion"
-    return this.http.put<AsignacionDocente>(this.url+"/"+asignacionDocente.curso, asignacionDocente);
-  }
-/*
-  public consultar(id: string): Observable<AsignacionDocente>{
-    this.url = "http://localhost:8090/asignacion/consultar/".concat(id);
+  public consultar(idCurso: string,idMateria:string){
+    this.url = "http://localhost:8090/asignacion/consultar/".concat(idCurso).concat(",").concat(idMateria);
     return this.http.get<AsignacionDocente>(this.url);
   }
-  */
+  
 }

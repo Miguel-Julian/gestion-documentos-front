@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { DocumentosDocenteService } from 'src/app/Service/documentos-docente.service';
 import { Curso } from 'src/app/Modelo/curso';
 import { Materia } from 'src/app/Modelo/materia';
+import { TemaService } from '../Service/tema.service';
 
 @Component({
   selector: 'app-index',
@@ -27,7 +28,7 @@ export class IndexComponent implements OnInit {
 
   constructor(private tokenService: TokenService, private doceteService: DocenteService,
     private asignacionDocenteService: AsignacionDocenteService, private router: Router,
-    private documentosDocenteService: DocumentosDocenteService) { }
+    private temaService: TemaService) { }
 
   ngOnInit(): void {
     if (this.tokenService.getToken()) {
@@ -85,8 +86,9 @@ export class IndexComponent implements OnInit {
   add(materia: Materia) {
     this.asignacionDocente.materia = materia;
     this.asignacionesDocente.forEach(element => {
-      if (this.asignacionDocente == element) {
-        this.documentosDocenteService.asignacionDocente = element;
+      if (this.asignacionDocente.curso.idCurso == element.curso.idCurso && element.materia.idMateria == this.asignacionDocente.materia.idMateria) {        
+        this.temaService.setIdCurso(element.curso.idCurso);
+        this.temaService.setIdMateria(element.materia.idMateria);            
       }
     })
 
