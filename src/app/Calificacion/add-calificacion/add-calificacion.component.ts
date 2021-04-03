@@ -27,6 +27,7 @@ export class AddCalificacionComponent implements OnInit {
   }
 
   Registrar(){
+    this.calificacion.isSelect = false;
     this.service.save(this.calificacion).subscribe(resultado=>{
       console.log(resultado);
       //alert(resultado[0]);

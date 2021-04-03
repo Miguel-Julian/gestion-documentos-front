@@ -39,8 +39,7 @@ export class ListarComponent implements OnInit {
     this.router.navigate(["editCurso"]);
   }
 
-  InactivarCurso(curso:Curso):void{
-    console.log("sdfghjk");
+  InactivarCurso(curso:Curso):void{    
     if(confirm("¿Seguro que desesa inactivar el curso?")){
       curso.estado = false;
       this.service.save(curso).subscribe(data=>{});
