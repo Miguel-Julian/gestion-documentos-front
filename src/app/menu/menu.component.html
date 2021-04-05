@@ -9,11 +9,12 @@
             <li><a routerLink="/listarCursos">Cursos</a></li>
             <li><a routerLink="/listarCalificaciones">Calificaciones</a></li>
             <li><a routerLink="/import">Importacion</a></li>
-            <li><a class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
+            <li><a style="margin-left: 420px;" class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
+            
         </ul>
         <!--Menu DOCENTE -->
         <ul class="menu" *ngIf="isLogged && roles[0]=='ROLE_DOCENTE'">
-            <li><a routerLink="/index">Inicio</a></li>            
+            <li><a routerLink="/index">Inicio</a></li>
             <li><a (click)="onLogOut()"> Cerrar Sesión</a></li>
         </ul>
         <!--Menu ESTUDIANTE-->

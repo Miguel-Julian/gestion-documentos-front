@@ -3,9 +3,9 @@ import { TipoDocumento } from './tipo-documento';
 import { Usuario } from 'src/app/Modelo/usuario';
 
 export class Estudiante {
-    idEstudiante:number =0;
+    idEstudiante: number = 0;
     dniEstudiante: number = 0;
-    tipoDocumento:TipoDocumento = new TipoDocumento;
+    tipoDocumento: TipoDocumento = new TipoDocumento;
     nombreEstudiante: String = "";
     apellidoEstudiante: String = "";
     telefonoEstudiante: String = "";

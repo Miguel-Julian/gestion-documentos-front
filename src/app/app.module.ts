@@ -35,6 +35,10 @@ import { interceptorProvider } from './Service/interceptor.service';
 import { AddDocDocenteComponent } from './Documentos/add-doc-docente/add-doc-docente.component';
 import { TemaComponent } from './tema/tema.component';
 import { AddDocEstudianteComponent } from './Documentos/add-doc-estudiante/add-doc-estudiante.component';
+import { FilterDocentePipe } from './pipe/filter-docente.pipe';
+import { FilterMateriaPipe } from './pipe/filter-materia.pipe';
+import { FilterCursoPipe } from './pipe/filter-curso.pipe';
+import { FilterAsignacionPipe } from './pipe/filter-asignacion.pipe';
 
 @NgModule({
   declarations: [
@@ -64,7 +68,11 @@ import { AddDocEstudianteComponent } from './Documentos/add-doc-estudiante/add-d
     MenuComponent,
     AddDocDocenteComponent,
     TemaComponent,
-    AddDocEstudianteComponent
+    AddDocEstudianteComponent,
+    FilterDocentePipe,
+    FilterMateriaPipe,
+    FilterCursoPipe,
+    FilterAsignacionPipe
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,8 @@ import { TokenService } from 'src/app/Service/token.service';
 })
 export class ListarAsigComponent implements OnInit {
 
-  asignacionDocentes: AsignacionDocente[]=[]
+  asignacionDocentes: AsignacionDocente[]=[];
+  filterAsignacion = '';
   pageActual: number = 1;
   isLogged = false;
 

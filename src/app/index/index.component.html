@@ -1,7 +1,10 @@
 <app-menu></app-menu>
-<div class="container text-center">
+<div class="">
     <div *ngIf="isLogged; else loggedOut"><h2>Bienvenido {{nombreUsuario}}</h2></div>
-    <ng-template #loggedOut><h2>No has iniciado sesión</h2></ng-template>
+    <ng-template #loggedOut>
+        <h1>Iniciar sesion</h1>    
+        <!--<img class="main" src="{{imgInicio}}">-->
+    </ng-template>
 </div>
 <div class="container" *ngIf="isLogged && roles[0]=='ROLE_DOCENTE'">
     <div class="container">

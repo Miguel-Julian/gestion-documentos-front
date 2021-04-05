@@ -12,7 +12,7 @@
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                           </svg>
                     </button>
-                    <input class="form-control my-2 my-sm-0 mr-sm-3" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control my-2 my-sm-0 mr-sm-3" name="filterAsignacion" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="filterAsignacion">
                     </form>
                 </div>
               </nav>
@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let asignacionDocente of asignacionDocentes
+                    <tr *ngFor="let asignacionDocente of asignacionDocentes | filterAsignacion: filterAsignacion
                     | paginate: { itemsPerPage: 10, currentPage: pageActual }" class="text-center">                        
                         <td>{{asignacionDocente.curso.nombreCurso}}</td>
                         <td>{{asignacionDocente.materia.nombreMateria}}</td>
