@@ -23,12 +23,16 @@ import { ImportExcelComponent } from './import-excel/import-excel.component';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './auth/login.component';
 import { AddDocDocenteComponent } from './Documentos/add-doc-docente/add-doc-docente.component';
+import { AddDocEstudianteComponent } from './Documentos/DocEstudiante/add-doc-estudiante/add-doc-estudiante.component';
+import { ListarDocEstudianteComponent } from './Documentos/DocEstudiante/listar-doc-estudiante/listar-doc-estudiante.component';
 import { TemaComponent } from './tema/tema.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 
 const routes: Routes = [
   { path: 'tema', component: TemaComponent },
   { path: 'addDocDocente', component: AddDocDocenteComponent },
+  { path: 'addDocEstudiante', component: AddDocEstudianteComponent },
+  { path: 'listarDocEstudiante', component: ListarDocEstudianteComponent },
   { path: 'index', component: IndexComponent },
   { path: 'login', component: LoginComponent },
   { path: 'listarCursos', component: ListarComponent },

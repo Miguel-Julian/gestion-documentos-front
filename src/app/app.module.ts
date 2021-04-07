@@ -47,8 +47,9 @@ import { IndexComponent } from './index/index.component';
 import { MenuComponent } from './menu/menu.component';
 import { AddDocDocenteComponent } from './Documentos/add-doc-docente/add-doc-docente.component';
 import { TemaComponent } from './tema/tema.component';
-import { AddDocEstudianteComponent } from './Documentos/add-doc-estudiante/add-doc-estudiante.component';
+import { AddDocEstudianteComponent } from './Documentos/DocEstudiante/add-doc-estudiante/add-doc-estudiante.component';
 import { CalendarioComponent } from './calendario/calendario.component';
+import { ListarDocEstudianteComponent } from './Documentos/DocEstudiante/listar-doc-estudiante/listar-doc-estudiante.component';
 
 //Registro de plugins para FullCalendar
 FullCalendarModule.registerPlugins([ 
@@ -89,7 +90,8 @@ FullCalendarModule.registerPlugins([
     FilterMateriaPipe,
     FilterCursoPipe,
     FilterAsignacionPipe,
-    CalendarioComponent
+    CalendarioComponent,
+    ListarDocEstudianteComponent
   ],
   imports: [
     BrowserModule,
