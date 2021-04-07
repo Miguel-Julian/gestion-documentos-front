@@ -19,6 +19,9 @@ export class DocumentosDocenteService {
     return this.http.post<string[]>(this.url+"/registrar", documentosDocente);
   }
 
+  public delete (documentosDocente:DocumentosDocente): Observable<string[]>{    
+    return this.http.post<string[]>(this.url+"/borrar", documentosDocente);
+  }
   
   public listar(id:string) {    
     return this.http.get<DocumentosDocente[]>(this.url+"/listar/".concat(id));

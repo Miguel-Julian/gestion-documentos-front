@@ -110,7 +110,14 @@ export class TemaComponent implements OnInit {
   }
 
   deleteDocDocente(documentoDocente: DocumentosDocente) {
-
+    if (confirm("¿Seguro que desesa eliminar la Actividad "+documentoDocente.nombreActividad+"?")) {
+      this.docDocenteService.delete(documentoDocente).subscribe(res => {
+        console.log(res)
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
   }
   enviarId(id: number): void {
     localStorage.setItem("idDocDocente", id.toString());
