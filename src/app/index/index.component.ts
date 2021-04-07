@@ -95,4 +95,8 @@ export class IndexComponent implements OnInit {
 
     this.router.navigate(["tema"]);
   }
+
+  calendar(){
+    this.router.navigate(["calendario"]);
+  }
 }

@@ -24,6 +24,7 @@ import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './auth/login.component';
 import { AddDocDocenteComponent } from './Documentos/add-doc-docente/add-doc-docente.component';
 import { TemaComponent } from './tema/tema.component';
+import { CalendarioComponent } from './calendario/calendario.component';
 
 const routes: Routes = [
   { path: 'tema', component: TemaComponent },
@@ -48,7 +49,8 @@ const routes: Routes = [
   { path: 'listarAsignacionDocente', component: ListarAsigComponent },
   { path: 'addAsignacionDocente', component: AddAsigComponent },
   { path: 'editAsignacionDocente', component: EditAsigComponent },
-  { path: 'import', component: ImportExcelComponent }
+  { path: 'import', component: ImportExcelComponent },
+  { path: 'calendario', component: CalendarioComponent }
 ];
 
 @NgModule({

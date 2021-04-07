@@ -1,17 +1,18 @@
 <div>
     <nav class="navegacion">
         <!--Menu ADMIN -->
-        <ul class="menu" *ngIf="isLogged && roles[0]=='ROLE_ADMIN'">
-            <li><a routerLink="/index">Inicio</a></li>
-            <li><a routerLink="/listarEstudiantes">Estudiantes</a></li>
-            <li><a routerLink="/listarDocentes">Docentes</a></li>
-            <li><a routerLink="/listarMaterias">Materias</a></li>
-            <li><a routerLink="/listarCursos">Cursos</a></li>
-            <li><a routerLink="/listarCalificaciones">Calificaciones</a></li>
-            <li><a routerLink="/import">Importacion</a></li>
-            <li><a style="margin-left: 420px;" class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
-            
-        </ul>
+        <div *ngIf="isLogged && roles[0]=='ROLE_ADMIN'">
+            <ul class="menu">
+                <li><a routerLink="/index">Inicio</a></li>
+                <li><a routerLink="/listarEstudiantes">Estudiantes</a></li>
+                <li><a routerLink="/listarDocentes">Docentes</a></li>
+                <li><a routerLink="/listarMaterias">Materias</a></li>
+                <li><a routerLink="/listarCursos">Cursos</a></li>
+                <li><a routerLink="/listarCalificaciones">Calificaciones</a></li>
+                <li><a routerLink="/import">Importacion</a></li>
+                <li><a style="margin-left: 500px;" class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
+            </ul>
+        </div>
         <!--Menu DOCENTE -->
         <ul class="menu" *ngIf="isLogged && roles[0]=='ROLE_DOCENTE'">
             <li><a routerLink="/index">Inicio</a></li>
@@ -23,9 +24,13 @@
             <li><a class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
         </ul>
         <!--Menu SIN LOGEARSE -->
-        <ul class="menu" *ngIf="!isLogged">
-            <li><a class="LogOut" routerLink="/login">Iniciar Sesión</a></li>
-        </ul>
+        <div *ngIf="!isLogged" class="main">
+            <ul class="menu">
+                <form class="d-flex">
+                    <li><a class="LogOut" routerLink="/login">Iniciar Sesión</a></li>
+                </form>
+            </ul>
+        </div>
 
     </nav><br>
 </div>

@@ -1,15 +1,31 @@
+// ANGULAR
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 
+// SERVICES 
+import { CursoService } from './Service/curso.service';
+import { interceptorProvider } from './Service/interceptor.service';
+
+//PIPES
+import { FilterDocentePipe } from './pipe/filter-docente.pipe';
+import { FilterMateriaPipe } from './pipe/filter-materia.pipe';
+import { FilterCursoPipe } from './pipe/filter-curso.pipe';
+import { FilterAsignacionPipe } from './pipe/filter-asignacion.pipe';
+import { FilterPipe } from './pipe/filter.pipe';
+
+// COMPONENTS
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddComponent } from './Curso/add/add.component';
 import { EditComponent } from './Curso/edit/edit.component';
 import { ListarComponent } from './Curso/listar/listar.component';
-import { CursoService } from './Service/curso.service';
 import { AddMateriaComponent } from './Materia/add-materia/add-materia.component';
 import { ListarMateriaComponent } from './Materia/listar-materia/listar-materia.component';
 import { EditMateriaComponent } from './Materia/edit-materia/edit-materia.component';
@@ -25,20 +41,20 @@ import { ListarEstudianteComponent } from './Estudiante/listar-estudiante/listar
 import { AddAsigComponent } from './AsignacionDocente/add-asig/add-asig.component';
 import { EditAsigComponent } from './AsignacionDocente/edit-asig/edit-asig.component';
 import { ListarAsigComponent } from './AsignacionDocente/listar-asig/listar-asig.component';
-import { FilterPipe } from './pipe/filter.pipe';
 import { ImportExcelComponent } from './import-excel/import-excel.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './auth/login.component';
 import { IndexComponent } from './index/index.component';
 import { MenuComponent } from './menu/menu.component';
-import { interceptorProvider } from './Service/interceptor.service';
 import { AddDocDocenteComponent } from './Documentos/add-doc-docente/add-doc-docente.component';
 import { TemaComponent } from './tema/tema.component';
 import { AddDocEstudianteComponent } from './Documentos/add-doc-estudiante/add-doc-estudiante.component';
-import { FilterDocentePipe } from './pipe/filter-docente.pipe';
-import { FilterMateriaPipe } from './pipe/filter-materia.pipe';
-import { FilterCursoPipe } from './pipe/filter-curso.pipe';
-import { FilterAsignacionPipe } from './pipe/filter-asignacion.pipe';
+import { CalendarioComponent } from './calendario/calendario.component';
+
+//Registro de plugins para FullCalendar
+FullCalendarModule.registerPlugins([ 
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -63,7 +79,7 @@ import { FilterAsignacionPipe } from './pipe/filter-asignacion.pipe';
     ListarAsigComponent,
     FilterPipe,
     ImportExcelComponent,
-    LoginComponent,    
+    LoginComponent,
     IndexComponent,
     MenuComponent,
     AddDocDocenteComponent,
@@ -72,7 +88,8 @@ import { FilterAsignacionPipe } from './pipe/filter-asignacion.pipe';
     FilterDocentePipe,
     FilterMateriaPipe,
     FilterCursoPipe,
-    FilterAsignacionPipe
+    FilterAsignacionPipe,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,
@@ -80,9 +97,10 @@ import { FilterAsignacionPipe } from './pipe/filter-asignacion.pipe';
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    FullCalendarModule
   ],
-  providers: [CursoService,interceptorProvider],
+  providers: [CursoService, interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,16 +1,18 @@
 <app-menu></app-menu>
-<div class="">
+<div>
     <div *ngIf="isLogged; else loggedOut"><h2>Bienvenido {{nombreUsuario}}</h2></div>
     <ng-template #loggedOut>
-        <h1>Iniciar sesion</h1>    
-        <!--<img class="main" src="{{imgInicio}}">-->
+            
+        
     </ng-template>
 </div>
+<!--DOCENTE-->
 <div class="container" *ngIf="isLogged && roles[0]=='ROLE_DOCENTE'">
     <div class="container">
         <table class="table table-hover">
             <tbody>
                 <td WIDTH="50%">
+                    <button (click)="calendar()" type="button" class="btn btn-primary btn-lg">Calendario</button><br>
                     <div *ngFor="let curso of cursos">
                         <div class="card" (click)="materiasOfCurso(curso)">
                             <div class="card-header">
@@ -52,3 +54,4 @@
         </table>
     </div>
 </div>
+<!--ESTUDIANTE-->
