@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DocumentosDocente } from '../Modelo/documentos-docente';
 import { Tema } from '../Modelo/tema';
 import { AsignacionDocenteService } from '../Service/asignacion-docente.service';
 import { DocumentosDocenteService } from '../Service/documentos-docente.service';
@@ -23,9 +25,12 @@ export class TemaComponent implements OnInit {
   temasAll: Tema[] = [];
   tema1: Tema = new Tema();
   selectTema: boolean = false;
+  documentosDocenteActivos: DocumentosDocente[] = [];
+  documentosDocenteInactivos: DocumentosDocente[] = [];
 
   constructor(private tokenService: TokenService, private temaService: TemaService,
-    private asignacionDocenteService: AsignacionDocenteService, private docDocenteService: DocumentosDocenteService) { }
+    private asignacionDocenteService: AsignacionDocenteService,
+    private docDocenteService: DocumentosDocenteService, private router: Router) { }
 
   ngOnInit(): void {
     if (this.tokenService.getToken()) {
@@ -36,16 +41,42 @@ export class TemaComponent implements OnInit {
       } else if (this.roles[0] == 'ROLE_ESTUDIANTE') {
         this.isDocente = false;
       }
-      this.temaService.listar().subscribe(temas => {
-        this.temas = temas;
-        temas.forEach(tem =>{
-          this.temasAll.push(tem);
+      this.cargarListas();
+    }
+  }
+
+
+  cargarListas() {
+    this.temaService.listar().subscribe(temas => {
+      this.temas = temas;
+      temas.forEach(tem => {
+        this.temasAll.push(tem);
+        this.docDocenteService.listar(tem.idTema.toString()).subscribe(docs => {
+          docs.forEach(doc => {
+            if (doc.estado) {
+              this.documentosDocenteActivos.push(doc);
+            } else {
+              this.documentosDocenteInactivos.push(doc);
+            }
+          });
         });
       });
+    });
+
+    if (this.isDocente) {
       this.temaService.listarFalse().subscribe(temasInactivos => {
         this.temasInactivos = temasInactivos;
-        temasInactivos.forEach(temIn =>{
+        temasInactivos.forEach(temIn => {
           this.temasAll.push(temIn);
+          this.docDocenteService.listar(temIn.idTema.toString()).subscribe(docs => {
+            docs.forEach(doc => {
+              if (doc.estado) {
+                this.documentosDocenteActivos.push(doc);
+              } else {
+                this.documentosDocenteInactivos.push(doc);
+              }
+            });
+          });
         });
       });
     }
@@ -57,18 +88,33 @@ export class TemaComponent implements OnInit {
       document.getElementById("tab_" + tem.idTema)?.setAttribute("class", "nav-link");
       document.getElementById("tab" + tem.idTema)?.setAttribute("aria-selected", "false");
       document.getElementById(tem.idTema.toString())?.setAttribute("class", "tab-pane fade");
-      if(tem.idTema == Number(id)){
+      if (tem.idTema == Number(id)) {
         this.docDocenteService.setIdTema(Number(id));
       }
     });
     document.getElementById("tab_" + id)?.setAttribute("class", "nav-link active");
     document.getElementById("tab_" + id + "")?.setAttribute("aria-selected", "true");
     document.getElementById(id.toString())?.setAttribute("class", "tab-pane fade show active");
-    if(this.docDocenteService.getIdTema() != ''){
-      this.selectTema = true;
+
+    this.selectTema = true;
+
+  }
+
+  accion(id: number):void{
+    localStorage.setItem("idDocDocente", id.toString());
+    if(this.isDocente){
+      this.router.navigate(["addDocDocente"]);
+    }else{
+      this.router.navigate(["listarDocEstudiante"]);
     }    
   }
 
+  deleteDocDocente(documentoDocente: DocumentosDocente) {
+
+  }
+  enviarId(id: number): void {
+    localStorage.setItem("idDocDocente", id.toString());
+  }
   deleteTema(tema: Tema) {
     if (confirm("¿Seguro que desesa eliminar el Tema, Se eliminaran todos las actividades de ese tema?")) {
       this.temaService.delete(tema).subscribe(res => {
@@ -82,9 +128,9 @@ export class TemaComponent implements OnInit {
 
   saveTema() {
     ///guarda un nuevo tema
-    if(document.getElementById("nuevoNombre") != undefined){
+    if (document.getElementById("nuevoNombre") != undefined) {
       var nomb: any = ((document.getElementById("nuevoNombre") as HTMLInputElement).value);
-    }    
+    }
     if (nomb != undefined && nomb != '') {
       this.tema1.nombreTema = nomb;
       this.asignacionDocenteService.consultar(this.temaService.getIdCurso(), this.temaService.getIdMateria()).subscribe(asig => {
@@ -97,7 +143,7 @@ export class TemaComponent implements OnInit {
     }
     //Actualiza los temas
     console.log("asfasdf")
-    this.temas.forEach(data => {
+    this.temasAll.forEach(data => {
       var nomb: any = document.getElementById("nombreCaja_" + data.idTema)?.innerHTML.toString();
       data.nombreTema = nomb;
       this.temaService.save(data).subscribe(res => {
@@ -137,9 +183,32 @@ export class TemaComponent implements OnInit {
   editarButton() {
     if (this.editar == true) {
       this.editar = false;
-      this.selectTema = false;          
     } else {
       this.editar = true;
     }
+  }
+
+  inactivarActivarDocDocente(documentoDocente: DocumentosDocente) {
+    if (documentoDocente.estado == false) {
+      documentoDocente.estado = true;
+    } else {
+      documentoDocente.estado = false;
+    }
+    this.docDocenteService.save(documentoDocente).subscribe(res => {
+      console.log(res)
+    });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  }
+
+  agregarDocDocente(): void {
+    window.localStorage.removeItem("id");
+    this.router.navigate(["addDocDocente"]);
+  }
+
+  EditarDocDocente(id: number): void {
+    localStorage.setItem("idDocDocente", id.toString());
+    this.router.navigate(["addDocDocente"]);
   }
 }

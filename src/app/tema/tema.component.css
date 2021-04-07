@@ -5,18 +5,24 @@
 }
 
 #activos{
-    background:#94b7df; 
+    background:#94b7df;     
     cursor: pointer;
 }
 
-#activosEditar{
-    background:#94b7df;     
+#contenedor{
+    cursor: text;
+    background:#ffffff;   
+    
+    min-width: 10px;
 }
 
-#contenedor{
-    background:#ffffff;   
-    display: inline-block;
-    min-width: 10px;
-  }
+#todo,#todo div,#todo li{         
+    display:inline-block;    
+}
 
-  
+#botones button{
+    display:inline-block;    
+}
+
+
+

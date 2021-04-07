@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AsignacionDocente } from '../Modelo/asignacion-docente';
 import { Tema } from '../Modelo/tema';
 
 const CURSO_KEY = 'CURSO_KEY';
@@ -42,22 +41,22 @@ export class TemaService {
   }
 
   public setIdMateria(idMateria: number): void {
-    window.sessionStorage.removeItem(MATERIA_KEY);
-    window.sessionStorage.setItem(MATERIA_KEY, idMateria.toString());
+    window.localStorage.removeItem(MATERIA_KEY);
+    window.localStorage.setItem(MATERIA_KEY, idMateria.toString());
   }
 
   public getIdMateria(): string {
-    var a: any = sessionStorage.getItem(MATERIA_KEY)
+    var a: any = localStorage.getItem(MATERIA_KEY)
     return a;
   }
 
   public setIdCurso(idCurso: number): void {
-    window.sessionStorage.removeItem(CURSO_KEY);
-    window.sessionStorage.setItem(CURSO_KEY, idCurso.toString());
+    window.localStorage.removeItem(CURSO_KEY);
+    window.localStorage.setItem(CURSO_KEY, idCurso.toString());
   }
 
   public getIdCurso(): string {
-    var a: any = sessionStorage.getItem(CURSO_KEY)
+    var a: any = localStorage.getItem(CURSO_KEY)
     return a;
   }
 

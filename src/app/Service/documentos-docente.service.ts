@@ -15,12 +15,18 @@ export class DocumentosDocenteService {
   constructor(private http: HttpClient) { }
 
   public save(documentosDocente: DocumentosDocente): Observable<string[]> {
-    return this.http.post<string[]>(`${this.url}/registrar`, documentosDocente);
+    console.log(documentosDocente)        
+    return this.http.post<string[]>(this.url+"/registrar", documentosDocente);
   }
 
-  public listar() {
-    this.url = "http://localhost:8090/tema/listar/".concat(this.getIdTema());
-    return this.http.get<DocumentosDocente[]>(this.url);
+  
+  public listar(id:string) {    
+    return this.http.get<DocumentosDocente[]>(this.url+"/listar/".concat(id));
+  }
+
+
+  public consultar(id: string): Observable<DocumentosDocente>{    
+    return this.http.get<DocumentosDocente>(this.url+"/consultar/".concat(id));
   }
 
   upload(file: File): Observable<HttpEvent<any>> {
@@ -33,8 +39,8 @@ export class DocumentosDocenteService {
     return this.http.request(req);
   }
 
-  getFiles() {
-    return this.http.get(`${this.url}/files`);
+  getFiles(id: string): Observable<string[]> {
+    return this.http.get<string[]>(this.url+"/files/".concat(id));
   }
 
   deleteFile(filename: string) {
@@ -42,12 +48,12 @@ export class DocumentosDocenteService {
   }
 
   public setIdTema(idTema: number): void {
-    window.sessionStorage.removeItem(TEMA_KEY);
-    window.sessionStorage.setItem(TEMA_KEY, idTema.toString());
+    window.localStorage.removeItem(TEMA_KEY);
+    window.localStorage.setItem(TEMA_KEY, idTema.toString());
   }
 
   public getIdTema(): string {
-    var a: any = sessionStorage.getItem(TEMA_KEY)
+    var a: any = localStorage.getItem(TEMA_KEY)
     return a;
   }
 }
