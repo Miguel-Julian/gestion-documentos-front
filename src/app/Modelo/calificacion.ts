@@ -5,7 +5,7 @@ export class Calificacion {
     notaMinima : number = 0.0;
     notaMaxima : number = 0.0;
     notaAprobacion : number = 0.0;
-    isSelect: boolean = true;
+    sel: boolean = true;
     estado: boolean = true;
 }
 

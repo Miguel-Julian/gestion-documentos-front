@@ -13,38 +13,39 @@ export class ListarCalificacionComponent implements OnInit {
 
   calificaciones: Calificacion[];
   pageActual: number = 1;
-  isLogged = false; 
+  isLogged = false;
+  select?: boolean;
 
-  constructor(private service:CalificacionService, private router: Router,private tokenService:TokenService) { 
+  constructor(private service: CalificacionService, private router: Router, private tokenService: TokenService) {
     this.calificaciones = [];
   }
 
   ngOnInit(): void {
-    this.service.listar().subscribe(data =>{
-      this.calificaciones=data;
-    });
     if (this.tokenService.getToken()) {
-      this.isLogged = true;     
-    }else{
-      this.isLogged = false;      
+      this.isLogged = true;
+      this.service.listar().subscribe(data => {        
+        this.calificaciones = data;        
+      });
+    } else {
+      this.isLogged = false;
     }
   }
 
-  RegistrarCalificaciones(){
+  RegistrarCalificaciones() {
     this.router.navigate(["addCalificacion"]);
   }
 
-  EditarCalificacion(calificacion:Calificacion):void{
-    localStorage.setItem("id",calificacion.idCalificacion.toString());
+  EditarCalificacion(calificacion: Calificacion): void {
+    localStorage.setItem("id", calificacion.idCalificacion.toString());
     this.router.navigate(["editCalificacion"]);
   }
 
-  InactivarCalificacion(calificacion:Calificacion):void{
+  InactivarCalificacion(calificacion: Calificacion): void {
     console.log("sdfghjk");
-    if(confirm("¿Seguro que desesa inactivar la Calificacion?")){
+    if (confirm("¿Seguro que desesa inactivar la Calificacion?")) {
       calificacion.estado = false;
-      this.service.save(calificacion).subscribe(data=>{});
-    }  
+      this.service.save(calificacion).subscribe(data => { });
+    }
   }
 
 }

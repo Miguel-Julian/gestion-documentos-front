@@ -27,6 +27,14 @@
                     <input [(ngModel)]="calificacion.notaAprobacion" name="notaAprobacion" type="number" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label for="">Seleccionar:</label>
+                    <select name="select" class="form-control" [(ngModel)]="calificacion.sel" name="isSelect">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Estado:</label>
                     <select name="select" class="form-control" [(ngModel)]="calificacion.estado" name="estado">
                         <option value="true">Activo</option>
                         <option value="false">Inactivo</option>

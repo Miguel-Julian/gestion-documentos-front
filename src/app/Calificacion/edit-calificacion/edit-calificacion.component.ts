@@ -13,16 +13,16 @@ import { TokenService } from 'src/app/Service/token.service';
 export class EditCalificacionComponent implements OnInit {
 
   calificacion: Calificacion = new Calificacion();
-  isLogged = false; 
-  
-  constructor(private router: Router, private service: CalificacionService,private tokenService:TokenService) { }
+  isLogged = false;
+
+  constructor(private router: Router, private service: CalificacionService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.Editar();
     if (this.tokenService.getToken()) {
-      this.isLogged = true;     
-    }else{
-      this.isLogged = false;      
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
     }
   }
 
@@ -35,12 +35,26 @@ export class EditCalificacionComponent implements OnInit {
     }
   }
 
-  Actualizar(calificacion: Calificacion) {
-    this.service.save(calificacion).subscribe(data => {
-      //this.calificacion = data[0];
-      alert(data[0]);
+  Actualizar(calificacion: Calificacion) {    
+    this.service.save(calificacion).subscribe(dat => {
+      alert(dat[0])
+    });   
+    var a:any = calificacion.sel;
+    if(a == "true") {
+      this.service.listar().subscribe(cals =>{      
+        cals.forEach(cal =>{        
+          if(cal.idCalificacion != calificacion.idCalificacion){
+            cal.sel =  false;          
+            this.service.save(cal).subscribe();
+          }
+        });
+      });      
+    }    
+
+    setTimeout(() => {
       this.router.navigate(["/listarCalificaciones"]);
-    });
+    }, 1000);
+
   }
 
 }
