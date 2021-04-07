@@ -12,6 +12,7 @@ import { TokenService } from 'src/app/Service/token.service';
 export class ListarComponent implements OnInit {
 
   cursos: Curso[];
+  filterCurso = '';
   pageActual: number = 1;
   isLogged = false; 
 

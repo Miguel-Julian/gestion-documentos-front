@@ -34,3 +34,10 @@
     color: #D90D32;
     cursor: pointer;
 }
+
+.main{
+    background-image: url(../../assets/Bienvenida.jpg);
+    background-size: 100%;
+    overflow: hidden;
+    height: 116vh;
+}

@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AsignacionDocente } from 'src/app/Modelo/asignacion-docente';
 import { Docente } from 'src/app/Modelo/docente';
 import { AsignacionDocenteService } from 'src/app/Service/asignacion-docente.service';
@@ -16,10 +17,12 @@ export class ListarDocenteComponent implements OnInit {
 
   docentes: Docente[]=[];
   pageActual: number = 1;
+  filterDocente = '';
+  docenteModal: Docente = new Docente;
   asignacionDocente: AsignacionDocente[]=[];
-  isLogged = false; 
+  isLogged = false;
 
-  constructor(private router:Router, private service:DocenteService, 
+  constructor(private router:Router, private service:DocenteService, private modalService: NgbModal,
     private asignacionService: AsignacionDocenteService,private tokenService:TokenService) { }
 
   ngOnInit(): void {
@@ -31,6 +34,12 @@ export class ListarDocenteComponent implements OnInit {
     }else{
       this.isLogged = false;      
     }
+  }
+
+  open(content:any, docente: Docente) {
+    this.modalService.open(content);
+    docente.usuario.contrasenia = docente.dniDocente.toString();
+    this.docenteModal = docente;    
   }
   
   RegistrarDocente(){

@@ -9,6 +9,7 @@ import { TokenService } from '../Service/token.service';
 })
 export class MenuComponent implements OnInit {
 
+  imgInicio: string = 'assets/Bienvenida.jpg';
   isLogged = false;
   roles: string[] = [];
   constructor(private tokenService: TokenService,private router:Router) { }

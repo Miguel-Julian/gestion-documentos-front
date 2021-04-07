@@ -13,7 +13,8 @@ import { TokenService } from 'src/app/Service/token.service';
 })
 export class ListarMateriaComponent implements OnInit {
 
-  materias:Materia[]=[]
+  materias:Materia[]=[];
+  filterMateria = '';
   pageActual: number = 1;
   materiaModal:Materia = new Materia();
   isLogged = false; 

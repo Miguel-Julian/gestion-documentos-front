@@ -17,6 +17,7 @@ import { TemaService } from '../Service/tema.service';
 })
 export class IndexComponent implements OnInit {
 
+  imgInicio: string = 'assets/Bienvenida.jpg';
   nombreUsuario: string = '';
   isLogged = false;
   asignacionesDocente: AsignacionDocente[] = [];
@@ -93,5 +94,9 @@ export class IndexComponent implements OnInit {
     })
 
     this.router.navigate(["tema"]);
+  }
+
+  calendar(){
+    this.router.navigate(["calendario"]);
   }
 }

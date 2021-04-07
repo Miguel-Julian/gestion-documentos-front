@@ -49,7 +49,7 @@ export class ListarEstudianteComponent implements OnInit {
   }
 
   InactivarEstudiante(estudiante:Estudiante):void{
-    console.log("Estudiante inactiva");
+    console.log("Estudiante inactivo");
     if(confirm("¿Seguro que desesa inactivar el estudiante?")){
       estudiante.estado = false;
       this.service.save(estudiante).subscribe(data=>{});
