@@ -10,7 +10,7 @@
                 <li><a routerLink="/listarCursos">Cursos</a></li>
                 <li><a routerLink="/listarCalificaciones">Calificaciones</a></li>
                 <li><a routerLink="/import">Importacion</a></li>
-                <li><a style="margin-left: 500px;" class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
+                <li><a class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
             </ul>
         </div>
         <!--Menu DOCENTE -->
@@ -24,10 +24,10 @@
             <li><a class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
         </ul>
         <!--Menu SIN LOGEARSE -->
-        <div *ngIf="!isLogged" class="main">
+        <div *ngIf="!isLogged">
             <ul class="menu">
                 <form class="d-flex">
-                    <li><a class="LogOut" routerLink="/login">Iniciar Sesión</a></li>
+                    <li><a  class="LogOut" routerLink="/login">Iniciar Sesión</a></li>
                 </form>
             </ul>
         </div>

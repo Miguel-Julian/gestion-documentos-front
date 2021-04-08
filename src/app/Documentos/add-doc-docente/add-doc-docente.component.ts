@@ -27,6 +27,7 @@ export class AddDocDocenteComponent implements OnInit {
   isLogged = false;
   flag: boolean = true;
   isEditar:boolean = false;
+  guardar:boolean = true;
   nombreArchivo: string = '';
   documentoDocente: DocumentosDocente = new DocumentosDocente();
   hide: boolean = true;
@@ -99,15 +100,16 @@ export class AddDocDocenteComponent implements OnInit {
     this.flag = false;
     this.documentoDocente.fechaInicio = new Date((document.getElementById("fechaInicio") as HTMLInputElement).value)
     this.documentoDocente.fechaLimite = new Date((document.getElementById("fechaLimite") as HTMLInputElement).value)    
-    setTimeout(() => {
-      if(this.cargar && this.isEditar){
-        this.documentoDocente.tema.nombreTema = "";        
-      }  
+    if(this.cargar && this.isEditar){
+      this.documentoDocente.tema.nombreTema = "";        
+    } 
+    if(this.guardar){       
       this.documentosDocenteService.save(this.documentoDocente).subscribe(resultado => {
         console.log(resultado);
+        console.log("entro registrar")
         this.datos =  resultado;
       });
-    }, 2000);
+    };
     
     this.modalService.open(content);
 
@@ -131,6 +133,7 @@ export class AddDocDocenteComponent implements OnInit {
   }
 
   upload(): void {
+    this.guardar = false; 
     this.progress = 0;
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
@@ -146,7 +149,16 @@ export class AddDocDocenteComponent implements OnInit {
             this.cargar = true;
           },
           (err: any) => {
-            console.log(err);                        
+            console.log(err);
+            var a:string = err.status
+            console.log(a)
+            if(a == "200"){
+              this.documentosDocenteService.save(this.documentoDocente).subscribe(resultado => {
+                console.log(resultado);
+                console.log("entro upload")
+                this.datos =  resultado;
+              });   
+            }                                
             this.progress = 0;
             if (err.error.text != null) {
               this.message = err.error.text;
@@ -157,7 +169,7 @@ export class AddDocDocenteComponent implements OnInit {
           });
       }
       this.selectedFiles = undefined;
-    }
+    }    
   }
 
 

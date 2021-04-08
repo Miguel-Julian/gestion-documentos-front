@@ -103,7 +103,7 @@ export class TemaComponent implements OnInit {
   accion(id: number):void{
     localStorage.setItem("idDocDocente", id.toString());
     if(this.isDocente){
-      this.router.navigate(["addDocDocente"]);
+      this.router.navigate(["addDocEstudiante"]);
     }else{
       this.router.navigate(["listarDocEstudiante"]);
     }    
@@ -210,7 +210,7 @@ export class TemaComponent implements OnInit {
   }
 
   agregarDocDocente(): void {
-    window.localStorage.removeItem("id");
+    window.localStorage.removeItem("idDocDocente");
     this.router.navigate(["addDocDocente"]);
   }
 

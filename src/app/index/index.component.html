@@ -79,8 +79,10 @@
     <div class="container">
         <table class="table table-hover">
             <tbody>
-                <td WIDTH="50%">
+                <tr>
                     <button (click)="calendar()" type="button" class="btn btn-primary btn-lg">Calendario</button><br>
+                </tr>
+                <td WIDTH="50%">                    
                     <div *ngFor="let curso of cursos">
                         <div class="card" (click)="materiasOfCurso(curso)">
                             <div class="card-header">
@@ -96,7 +98,7 @@
                 </td>
                 <td>
                     <div *ngFor="let materia of materias">
-                        <div class="card" (click)="add(materia)">
+                        <div class="card" (click)="addDocente(materia)">
                             <div class="card-header">
                                 <nav class="navbar navbar-light bg-light">
                                     <div class="container-fluid">
@@ -109,7 +111,43 @@
                                     <thead class="thead-light">
                                         <tr class="text-center">
                                             <th>Curso: </th>
-                                            <th>{{asignacionDocente.curso.nombreCurso}}</th>
+                                            <th>{{curso.nombreCurso}}</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>                            
+                        </div>
+                        <br>
+                    </div>
+                </td>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--ESTUDIANTE-->
+<div class="container" *ngIf="isLogged && roles[0]=='ROLE_ESTUDIANTE'">
+    <div class="container">
+        <table class="table table-hover">
+            <tbody>
+                <td>
+                    <div *ngFor="let materias of asignacionesDocente">
+                        <div class="card" (click)="addEstudiante(materias)">
+                            <div class="card-header">
+                                <nav class="navbar navbar-light bg-light">
+                                    <div class="container-fluid">
+                                        <h4>{{materias.materia.nombreMateria}}</h4>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead class="thead-light">
+                                        <tr class="text-center">
+                                            <th>Curso: </th>
+                                            <th>{{materias.curso.nombreCurso}}</th>
+                                            <th>Docente:</th>
+                                            <th>{{materias.docente.nombreDocente}} {{materias.docente.apellidoDocente}}
+                                            </th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -122,4 +160,3 @@
         </table>
     </div>
 </div>
-<!--ESTUDIANTE-->

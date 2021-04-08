@@ -136,7 +136,7 @@
                                     <tr *ngFor="let docDocente of documentosDocenteInactivos">
                                         <div *ngIf="docDocente.tema.idTema == tema.idTema && editar">
                                             <td>
-                                                <button class="btn btn-outline-primary" (click)="accion(docDocente.idDocumentosDocente)">
+                                                <button class="btn btn-outline-danger" (click)="accion(docDocente.idDocumentosDocente)">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         fill="currentColor" class="bi bi-journal-bookmark-fill"
                                                         viewBox="0 0 16 16">
@@ -148,9 +148,9 @@
                                                             d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                                                     </svg>
                                                 </button>
-                                                <a *ngIf="!isDocente" (click)="enviarId(docDocente.idDocumentosDocente)"
+                                                <a *ngIf="!isDocente" style="color: tomato;" (click)="enviarId(docDocente.idDocumentosDocente)"
                                                     href="/addDocEstudiante">{{docDocente.nombreActividad}}</a>
-                                                <a *ngIf="isDocente" (click)="enviarId(docDocente.idDocumentosDocente)"
+                                                <a *ngIf="isDocente" style="color: tomato;" (click)="enviarId(docDocente.idDocumentosDocente)"
                                                     href="/listarDocEstudiante">{{docDocente.nombreActividad}}</a>
                                             </td>
                                             <td id="botones" *ngIf="editar" WIDTH="40%">
