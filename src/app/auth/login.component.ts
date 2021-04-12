@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Usuario } from '../Modelo/usuario';
 import { AuthService } from '../Service/auth.service';
 import { TokenService } from '../Service/token.service';
+import { UsuarioService } from '../Service/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   errMsj: string = '';
 
-  constructor(private tokenService: TokenService, private authService: AuthService, private router: Router) { }
+  constructor(private tokenService: TokenService, private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     if (this.tokenService.getToken()) {
@@ -36,7 +38,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginUsuario).subscribe(data => {
       this.isLogged = true;
       this.isLoginFail = false;
-
       this.tokenService.setToken(data.token);
       this.tokenService.setUsertName(data.nombreUsuario);
       this.tokenService.setAuthorities(data.authorities);
@@ -50,5 +51,4 @@ export class LoginComponent implements OnInit {
       console.log(this.errMsj);
     });
   }
-
 }

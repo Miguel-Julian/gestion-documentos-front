@@ -1,2 +1,148 @@
 <app-menu></app-menu>
-<p>add-doc-estudiante works!</p>
+
+<div class="container col-md-8" *ngIf="isLogged">
+    <div class="card">
+        <div class="card-header">
+            <h3>{{documentoEstudiante.documentosDocente.nombreActividad}}</h3>
+        </div>
+        <div class="card-body">
+            <form action="">
+                <br>
+                <div class="form-group">
+                    <label>{{documentoEstudiante.documentosDocente.descripcionActividad}}</label>
+                </div>
+                <br>
+                <div class="form-group" *ngIf="mens[0] != ''">
+                    <a href="{{URLFileDocente}}" download="nombreArchivoUrlDocente">
+                        <button class="btn btn-primary btn-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-journal-arrow-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z" />
+                                <path
+                                    d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                <path
+                                    d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                            </svg>
+                        </button>
+                        {{mens[0]}}
+                    </a>
+                </div>                
+                <div class="card">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td WIDTH="25%">
+                                    <div class="card-header">
+                                        <h6>Nota: </h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card-body">{{mens[1]}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td WIDTH="25%">
+                                    <div class="card-header">
+                                        <h6>Fecha entrega: </h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card-body">{{mens[2]}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td WIDTH="25%">
+                                    <div class="card-header">
+                                        <h6>Tiempo Restante: </h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div *ngIf="estadoEntrega == 0" style="color: lightcoral;" class="card-body">
+                                        {{mens[3]}}</div>
+                                    <div *ngIf="estadoEntrega == 1" class="card-body">{{mens[3]}}</div>
+                                    <div *ngIf="estadoEntrega == 2" style="color: rgb(31, 224, 31);" class="card-body">
+                                        {{mens[3]}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td WIDTH="25%">
+                                    <div class="card-header">
+                                        <h6>Comentarios: </h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card-body">{{mens[4]}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td WIDTH="25%">
+                                    <div class="card-header">
+                                        <h6>Archivo: </h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card-body" *ngIf="isEnviar && isCambio else nom">
+                                        <input lass="form-control" type="file" [(ngModel)]="nombreArchivo"
+                                            name="nombreArchivo" (change)="selectFile($event)" />
+                                    </div>
+                                    <ng-template #nom>
+                                        <div class="card-body" *ngIf="mens[5] != ''">
+                                            <a href="{{URLFileEstudiante}}" download="">
+                                                <button class="btn btn-primary btn-sm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        fill="currentColor" class="bi bi-journal-arrow-down"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z" />
+                                                        <path
+                                                            d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                                        <path
+                                                            d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                                                    </svg>
+                                                </button>
+                                                {{mens[5]}}
+                                            </a>
+                                            <button *ngIf="isCambio" (click)="cambiarArchivo()" class="btn btn-outline-danger"
+                                                style="margin-left: 10px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                    fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                    <path
+                                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </ng-template>
+                                </td>
+                            </tr>
+                            <tr>
+                                <div class="alert alert-success" *ngIf="!hide">{{message}}</div>
+                                <div *ngIf="currentFile" class="progress my-3">
+                                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                                        attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
+                                        [ngStyle]="{ width: progress + '%' }">
+                                        {{ progress }}%
+                                    </div>
+                                </div>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div id="button" *ngIf="isEnviar && isCambio">
+                                        <button (click)="upload()" class="btn btn-danger" [disabled]="!selectedFiles"
+                                            id="btnRegistrar">Enviar
+                                            Archivo</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

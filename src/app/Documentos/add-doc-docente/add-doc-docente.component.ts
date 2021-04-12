@@ -1,6 +1,5 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { DocumentosDocente } from 'src/app/Modelo/documentos-docente';
 import { CalificacionService } from 'src/app/Service/calificacion.service';
 import { CursoService } from 'src/app/Service/curso.service';
@@ -17,17 +16,17 @@ import { TokenService } from 'src/app/Service/token.service';
 })
 export class AddDocDocenteComponent implements OnInit {
 
+  isLogged = false;
+  isEditar:boolean = false;
+  guardar:boolean = true;
   selectedFiles?: FileList;
   currentFile?: File;
   progress = 0;
   message = '';
   message2 = '';
   URLFile: string[] = [];
-  editarArchivo: boolean = true;
-  isLogged = false;
-  flag: boolean = true;
-  isEditar:boolean = false;
-  guardar:boolean = true;
+  editarArchivo: boolean = true;  
+  flag: boolean = true;  
   nombreArchivo: string = '';
   documentoDocente: DocumentosDocente = new DocumentosDocente();
   hide: boolean = true;
