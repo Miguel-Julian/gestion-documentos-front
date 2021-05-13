@@ -22,6 +22,7 @@
         <!--Menu ESTUDIANTE-->
         <ul class="menu" *ngIf="isLogged && roles[0]=='ROLE_ESTUDIANTE'">
             <li><a routerLink="/index">Inicio</a></li>
+            <li><a routerLink="/reporteEstudiante">Reportes</a></li>
             <li><a class="LogOut" (click)="onLogOut()"> Cerrar Sesión</a></li>
         </ul>
         <!--Menu SIN LOGEARSE -->

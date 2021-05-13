@@ -1,1 +1,110 @@
-<p>estudiante works!</p>
+<app-menu></app-menu>
+<div *ngIf="isLogged">
+    <div>
+
+    </div>
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label for="">Materia: </label>
+                        <select class="form-control" [(ngModel)]="materia.idMateria"
+                            (ngModelChange)="setCursoAndMateria($event)" name="materia">
+                            <option value="0">--seleccione--</option>
+                            <option *ngFor="let materia of materias" value={{materia.idMateria}}>
+                                {{materia.nombreMateria}}
+                            </option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr class="text-center">
+                <td>
+                    <button class="btn btn-primary" id="botonMostrar" (click)="quitarVacios()" disabled>mostrar</button>
+                </td>
+                <td>
+
+                    <button id="descargar" (click)="downloadPDF()" style="visibility: hidden;"
+                        class="btn btn-danger">Descargar Reporte</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="cali" *ngIf="calificacion" style="visibility: hidden;">
+        <table class="table table-bordered">
+            <tbody class="">
+                <tr class="text-center">
+                    <th><br>
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr class="text-center">
+                                    <th>Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">                                    
+                                            {{estudiante.nombreEstudiante}} {{estudiante.apellidoEstudiante}}                                        
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </th>
+                    <th id="cont2" *ngFor="let tema of listTemas">
+                        {{tema.nombreTema}}
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr id="notasHead" class="text-center">
+                                    <th *ngFor="let docDocente of listDocDocente">
+                                        <div *ngIf="tema.idTema == docDocente.tema.idTema">
+                                            {{docDocente.nombreActividad}}
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="notasBody">
+                                    <td class="text-center" *ngFor="let docDocente of listDocDocente">
+                                        <div *ngIf="tema.idTema == docDocente.tema.idTema">
+                                            <div *ngFor="let docStudent of listDocStudents">
+                                                <div
+                                                    *ngIf="docDocente.idDocumentosDocente == docStudent.documentosDocente.idDocumentosDocente">
+                                                    {{docStudent.nota}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </th>
+                    <th><br>
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr class="text-center">
+                                    <th>Nota Definitiva</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <div *ngFor="let nota of notaDefinitiva">
+                                            {{nota}}
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </th>
+
+                </tr>
+                <tr class="text-center">
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

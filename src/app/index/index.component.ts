@@ -51,6 +51,7 @@ export class IndexComponent implements OnInit {
               res.forEach(element => {
                 if (student.curso.idCurso == element.curso.idCurso) {
                   this.asignacionesDocente.push(element);
+                  this.temaService.setIdCurso(student.curso.idCurso);
                 }
               });
             });

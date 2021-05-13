@@ -9,8 +9,8 @@
                 <td>
                     <div class="form-group">
                         <label for="">Curso: </label>
-                        <select class="form-control" [(ngModel)]="curso.idCurso" (ngModelChange)="obtenerListaMateriasPorCurso($event)"
-                            name="curso">
+                        <select class="form-control" [(ngModel)]="curso.idCurso"
+                            (ngModelChange)="obtenerListaMateriasPorCurso($event)" name="curso">
                             <option value="0">--seleccione--</option>
                             <option *ngFor="let curso of cursos" value={{curso.idCurso}}>{{curso.nombreCurso}}</option>
                         </select>
@@ -19,7 +19,8 @@
                 <td>
                     <div class="form-group">
                         <label for="">Materia: </label>
-                        <select class="form-control" [(ngModel)]="materia.idMateria" (ngModelChange)="setCursoAndMateria($event)" name="materia">
+                        <select class="form-control" [(ngModel)]="materia.idMateria"
+                            (ngModelChange)="setCursoAndMateria($event)" name="materia">
                             <option value="0">--seleccione--</option>
                             <option *ngFor="let materia of materias" value={{materia.idMateria}}>
                                 {{materia.nombreMateria}}
@@ -30,12 +31,12 @@
             </tr>
             <tr class="text-center">
                 <td>
-                    <button class="btn btn-primary" id="botonMostrar" (click)="quitarVacios()" disabled >mostrar</button>
-                </td>                
+                    <button class="btn btn-primary" id="botonMostrar" (click)="quitarVacios()" disabled>mostrar</button>
+                </td>
                 <td>
-                    <a href="" download="">
-                        <button id="descargar" style="visibility: hidden;" class="btn btn-danger">Descargar Reporte</button>
-                    </a>                    
+
+                    <button id="descargar" (click)="downloadPDF()" style="visibility: hidden;"
+                        class="btn btn-danger">Descargar Reporte</button>
                 </td>
             </tr>
         </tbody>
@@ -58,14 +59,14 @@
                                             {{estudiante.nombreEstudiante}} {{estudiante.apellidoEstudiante}}
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
                             </tbody>
                         </table>
                     </th>
                     <th id="cont2" *ngFor="let tema of listTemas">
                         {{tema.nombreTema}}
-                        <table class="table table-bordered" >
+                        <table class="table table-bordered">
                             <thead class="thead-light">
                                 <tr id="notasHead" class="text-center">
                                     <th *ngFor="let docDocente of listDocDocente">
@@ -80,10 +81,11 @@
                                     <td class="text-center" *ngFor="let docDocente of listDocDocente">
                                         <div *ngIf="tema.idTema == docDocente.tema.idTema">
                                             <div *ngFor="let docStudent of listDocStudents">
-                                                <div *ngIf="docDocente.idDocumentosDocente == docStudent.documentosDocente.idDocumentosDocente">
+                                                <div
+                                                    *ngIf="docDocente.idDocumentosDocente == docStudent.documentosDocente.idDocumentosDocente">
                                                     {{docStudent.nota}}</div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -103,12 +105,12 @@
                                             {{nota}}
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
                             </tbody>
                         </table>
                     </th>
-                    
+
                 </tr>
                 <tr class="text-center">
 
@@ -116,5 +118,5 @@
 
             </tbody>
         </table>
-    </div>    
+    </div>
 </div>

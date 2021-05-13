@@ -15,6 +15,8 @@ import { EstudianteService } from 'src/app/Service/estudiante.service';
 import { MateriaService } from 'src/app/Service/materia.service';
 import { TemaService } from 'src/app/Service/tema.service';
 import { TokenService } from 'src/app/Service/token.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-docente',
@@ -56,7 +58,31 @@ export class DocenteComponent implements OnInit {
       this.cargarCursos();
     }
   }
+  downloadPDF() {
+    // Extraemos el
+    const DATA:HTMLElement = document.getElementById('cali')!;
+    const doc = new jsPDF('l', 'pt', 'a4');
+    
+    const options = {
+      background: 'white',
+      scale: 3
+    };    
+    html2canvas(DATA, options).then((canvas) => {
 
+      const img = canvas.toDataURL('image/PNG');
+
+      // Add image Canvas to PDF
+      const bufferX = 15;
+      const bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      return doc;
+    }).then((docResult) => {
+      docResult.save(`${new Date().toISOString()}ReporteNotas.pdf`);
+    });
+  }
   cargarCursos() {
     this.doceteService.listar().subscribe(data => {
       data.forEach(profe => {
