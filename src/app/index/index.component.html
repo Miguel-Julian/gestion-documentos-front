@@ -1,7 +1,6 @@
 <app-menu></app-menu>
 <div>
     <div *ngIf="isLogged; else loggedOut">
-        <h2>Holiii Bienvenido {{nombreUsuario}}</h2>
     </div>
     <ng-template #loggedOut>
 
@@ -79,9 +78,7 @@
     <div class="container">
         <table class="table table-hover">
             <tbody>
-                <tr>
-                    <button (click)="calendar()" type="button" class="btn btn-primary btn-lg">Calendario</button><br>
-                </tr>
+
                 <td WIDTH="50%">                    
                     <div *ngFor="let curso of cursos">
                         <div class="card" (click)="materiasOfCurso(curso)">
