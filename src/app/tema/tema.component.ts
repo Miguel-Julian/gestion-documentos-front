@@ -103,9 +103,9 @@ export class TemaComponent implements OnInit {
   accion(id: number):void{
     localStorage.setItem("idDocDocente", id.toString());
     if(this.isDocente){
-      this.router.navigate(["addDocEstudiante"]);
-    }else{
       this.router.navigate(["listarDocEstudiante"]);
+    }else{      
+      this.router.navigate(["addDocEstudiante"]);
     }    
   }
 

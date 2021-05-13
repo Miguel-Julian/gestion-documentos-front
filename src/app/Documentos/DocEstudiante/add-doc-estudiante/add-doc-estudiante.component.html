@@ -88,7 +88,7 @@
                                     </div>
                                     <ng-template #nom>
                                         <div class="card-body" *ngIf="mens[5] != ''">
-                                            <a href="{{URLFileEstudiante}}" download="">
+                                            <a href="{{URLFileEstudiante}}">
                                                 <button class="btn btn-primary btn-sm">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         fill="currentColor" class="bi bi-journal-arrow-down"
@@ -103,7 +103,7 @@
                                                 </button>
                                                 {{mens[5]}}
                                             </a>
-                                            <button *ngIf="isCambio" (click)="cambiarArchivo()" class="btn btn-outline-danger"
+                                            <button *ngIf="isCambio && documentoEstudiante.estado == false" (click)="cambiarArchivo()" class="btn btn-outline-danger"
                                                 style="margin-left: 10px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                     fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">

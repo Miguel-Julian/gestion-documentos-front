@@ -1,2 +1,112 @@
 <app-menu></app-menu>
-<p>listar-doc-estudiante works!</p>
+<div class="card-body" *ngIf="isLogged">
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr class="text-center">
+                <th>ESTUDIANTES</th>
+                <th>CALIFICACIÓN</th>
+            </tr>
+        <tbody>
+            <td id="mano" WIDTH="40%">
+                <div class="card">
+                    <tr *ngFor="let docEstudiante of documentosEstudiante" (click)="calificar(docEstudiante)">
+                        <div class="card-body" style="color: lawngreen;" *ngIf="docEstudiante.estado && docEstudiante.rutaArchivo != null" >                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                              </svg>                            
+                            {{docEstudiante.estudiante.nombreEstudiante}}
+                            {{docEstudiante.estudiante.apellidoEstudiante}}                        
+                        </div>
+                        <div class="card-body" *ngIf="!docEstudiante.estado &&  docEstudiante.rutaArchivo != null">                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                              </svg>                            
+                            {{docEstudiante.estudiante.nombreEstudiante}}
+                            {{docEstudiante.estudiante.apellidoEstudiante}}                        
+                        </div>
+                        <div class="card-body" style="color:lightcoral;" *ngIf="!docEstudiante.estado &&  docEstudiante.rutaArchivo == null">                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                              </svg>                            
+                            {{docEstudiante.estudiante.nombreEstudiante}}
+                            {{docEstudiante.estudiante.apellidoEstudiante}}                        
+                        </div>
+                    </tr>
+                </div>
+            </td>
+            <td *ngIf="documentoEstudiante.estudiante.nombreEstudiante != ''; else seleccione">
+                <div class="card-header">
+                    <h3>{{documentoEstudiante.estudiante.nombreEstudiante}}
+                        {{documentoEstudiante.estudiante.apellidoEstudiante}}</h3>
+                </div>
+                <div class="card-body" *ngIf="!noEnvio">
+                    <a href="{{URLFileEstudiante}}" download="">
+                        <button class="btn btn-primary btn-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" class="bi bi-journal-arrow-down"
+                                viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z" />
+                                <path
+                                    d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                <path
+                                    d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                            </svg>
+                        </button>
+                        {{documentoEstudiante.nombreArchivo}}
+                    </a>                    
+                </div>
+                <div class="form-group">
+                    <label for="">Nota:</label>
+                    <input [(ngModel)]="documentoEstudiante.nota" name="nota" type="number" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Comentario:</label>
+                    <input [(ngModel)]="documentoEstudiante.comentario" name="comentario" type="text"
+                        class="form-control">
+                </div>
+                <button (click)="Registrar(mensaje)" class="btn btn-danger" id="btnRegistrar">Registrar</button>
+            </td>
+            <ng-template #seleccione>
+                <td>
+                    <br>
+                    <h4 style="margin-left: 30%;">Por Favor seleccione un estudiante</h4>
+                    <br>                    
+                    <tr>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                              </svg>Nombre -- Entrego y Sin Calificar
+                        </div>
+                    </tr>
+                    <tr>
+                        <div style="color:lightgreen;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                              </svg>Nombre -- Calificado
+                        </div>
+                    </tr>
+                    <tr>
+                        <div style="color:lightpink ;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                              </svg>Nombre -- No Entrego
+                        </div>
+                    </tr>                                      
+                </td>
+            </ng-template>
+        </tbody>
+    </table>
+</div>
+<ng-template #mensaje let-modal>
+    <div class="modal-body">    
+             
+        <div style="white-space: pre;">{{message}}</div>
+    </div>
+</ng-template>

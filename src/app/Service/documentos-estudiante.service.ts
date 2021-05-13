@@ -22,8 +22,8 @@ export class DocumentosEstudianteService {
     return this.http.post<string[]>(this.url+"/borrar", documentosDocente);
   }
   
-  public listar(id:string) {    
-    return this.http.get<DocumentosEstudiante[]>(this.url+"/listar/".concat(id));
+  public listar(idDocDocente: string) {    
+    return this.http.get<DocumentosEstudiante[]>(this.url+"/listarByDocDocente/".concat(idDocDocente));
   }
 
   public consultar(idDocDocente: string,idEstudiante:string): Observable<DocumentosEstudiante>{    
@@ -46,5 +46,9 @@ export class DocumentosEstudianteService {
 
   deleteFile(filename: string) {
     return this.http.get(`${this.url}/delete/${filename}`);
+  }
+
+  notaDefinitiva(idCurso:string,idMateria:string,idEstudiante:string): Observable<number>{
+    return this.http.get<number>(this.url+"/notaDefinitiva/"+idCurso+","+idMateria+","+idEstudiante);
   }
 }

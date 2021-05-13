@@ -9,6 +9,6 @@ export class DocumentosEstudiante {
     nombreArchivo : string = '';
     comentario: string = '';
     fechaEntrega : Date = new Date();  
-    estado: boolean = true;
+    estado: boolean = false;
 }
 

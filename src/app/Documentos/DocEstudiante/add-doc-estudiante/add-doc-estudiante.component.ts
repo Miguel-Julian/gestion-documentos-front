@@ -24,6 +24,7 @@ export class AddDocEstudianteComponent implements OnInit {
   currentFile?: File;
   progress = 0;
   message = '';
+  rutaArchivoStudent = '';
   nombreArchivo: string = '';
   hide: boolean = true;
   tiempoRestante: String = '';
@@ -59,7 +60,7 @@ export class AddDocEstudianteComponent implements OnInit {
           this.mens[3] = this.diferenciaFechas(data.fechaLimite, new Date());
         }
         this.documentoEstudiante.documentosDocente = data;
-        this.documentoEstudiante.rutaArchivo = data.rutaArchivo + "Archivos Estudiantes/";
+        this.rutaArchivoStudent = data.rutaArchivo + "Archivos Estudiantes/";
         this.documentosDocenteService.getFiles(data.idDocumentosDocente.toString()).subscribe(rut => {
           if (rut.length != 0) {
             this.URLFileDocente = rut[0];
@@ -72,35 +73,37 @@ export class AddDocEstudianteComponent implements OnInit {
     this.estudianteService.listar().subscribe(students => {
       students.forEach(student => {
         if (student.usuario.nombreUsuario == this.tokenService.getUsertName()) {
-          this.documentoEstudiante.estudiante = student;
+          this.documentoEstudiante.estudiante = student;          
           this.documentosEstudianteService.consultar(idDocDocente, student.idEstudiante.toString()).subscribe(docEstu => {
-            if (docEstu != null) {///verifica si el estudiante ya hizo alguna entrega
-              this.documentoEstudiante = docEstu;
+            if (docEstu.rutaArchivo != null) {///verifica si el estudiante ya hizo alguna entrega
+              this.documentoEstudiante = docEstu;              
               if (docEstu.nota != 0.0) {
                 this.mens[1] = docEstu.nota + "";
               }
-              var fechaEntrega: Date = new Date(docEstu.fechaEntrega.toString());
-              this.mens[2] = this.fecha(fechaEntrega);
-              this.estadoEntrega = 2;
-              if (this.estadoEntregaComparacion(docEstu.documentosDocente.fechaLimite, fechaEntrega) == 0) {
+              if (docEstu.nombreArchivo != null) {
+                var fechaEntrega: Date = new Date(docEstu.fechaEntrega.toString());
+                this.mens[2] = this.fecha(fechaEntrega);
+                this.estadoEntrega = 2;
+                if (this.estadoEntregaComparacion(docEstu.documentosDocente.fechaLimite, fechaEntrega) == 0) {
+                  this.isEnviar = false;
+                }
+                this.mens[3] = "La Tarea fue entregada con: " + this.diferenciaFechas(docEstu.documentosDocente.fechaLimite, fechaEntrega) + " Restantes";
+                this.documentosEstudianteService.getFiles(idDocDocente, docEstu.estudiante.idEstudiante.toString()).subscribe(urlFiles => {
+                  urlFiles.forEach(urlFile => {
+                    var leng = urlFile.split("/").length;
+                    var nombreArchivo = urlFile.split("/")[leng - 1]
+                    if (nombreArchivo == docEstu.nombreArchivo) {
+                      this.mens[5] = docEstu.nombreArchivo;
+                      this.URLFileEstudiante = urlFile;
+                    }
+                  });
+                });                
                 this.isEnviar = false;
-              }
-              this.mens[3] = "La Tarea fue entregada con: " + this.diferenciaFechas(docEstu.documentosDocente.fechaLimite, fechaEntrega) + " Restantes";
-              if (docEstu.comentario != '') {
+              console.log(docEstu)
+              }                            
+              if (docEstu.comentario != null && docEstu.comentario != '') {
                 this.mens[4] = docEstu.comentario;
               }
-              this.documentosEstudianteService.getFiles(idDocDocente, docEstu.estudiante.idEstudiante.toString()).subscribe(urlFiles => {
-                urlFiles.forEach(urlFile => {
-                  var leng = urlFile.split("/").length;
-                  var nombreArchivo = urlFile.split("/")[leng - 1]
-                  if (nombreArchivo == docEstu.nombreArchivo) {
-                    this.mens[5] = docEstu.nombreArchivo;
-                    this.URLFileEstudiante = urlFile;
-                  }
-                });
-              });
-              this.isEnviar = false;
-              console.log(docEstu)
             }
           });
         }
@@ -142,11 +145,10 @@ export class AddDocEstudianteComponent implements OnInit {
       var a: string[] = this.nombreArchivo.split("\\");
       this.documentoEstudiante.nombreArchivo = a[a.length - 1];
       this.documentoEstudiante.fechaEntrega = new Date();
+      this.documentoEstudiante.rutaArchivo = this.rutaArchivoStudent;
       this.documentosEstudianteService.save(this.documentoEstudiante).subscribe(mesa => {
         console.log(mesa);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+
         
       });
     }

@@ -85,11 +85,10 @@
                 <div class="" *ngIf="isLogged">
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-hover">
+                            <table class="table table-hover">                                
                                 <tbody>
-                                    <tr *ngFor="let docDocente of documentosDocenteActivos">
-                                        <div *ngIf="docDocente.tema.idTema == tema.idTema">
-                                            <td>
+                                    <tr *ngFor="let docDocente of documentosDocenteActivos">                                        
+                                            <td *ngIf="docDocente.tema.idTema == tema.idTema">
                                                 <button class="btn btn-outline-primary" (click)="accion(docDocente.idDocumentosDocente)">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         fill="currentColor" class="bi bi-journal-bookmark-fill"
@@ -107,7 +106,7 @@
                                                 <a *ngIf="isDocente" (click)="enviarId(docDocente.idDocumentosDocente)"
                                                     href="/listarDocEstudiante">{{docDocente.nombreActividad}}</a>
                                             </td>
-                                            <td id="botones" *ngIf="editar" WIDTH="20%">
+                                            <td id="botones" *ngIf="docDocente.tema.idTema == tema.idTema && editar" WIDTH="40%">
                                                 <button (click)="EditarDocDocente(docDocente.idDocumentosDocente)"
                                                     class="btn btn-outline-dark">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -130,12 +129,10 @@
                                                             d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
                                                     </svg>
                                                 </button>
-                                            </td>
-                                        </div>
+                                            </td>                                        
                                     </tr>
-                                    <tr *ngFor="let docDocente of documentosDocenteInactivos">
-                                        <div *ngIf="docDocente.tema.idTema == tema.idTema && editar">
-                                            <td>
+                                    <tr *ngFor="let docDocente of documentosDocenteInactivos">                                        
+                                            <td *ngIf="docDocente.tema.idTema == tema.idTema && editar">
                                                 <button class="btn btn-outline-danger" (click)="accion(docDocente.idDocumentosDocente)">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         fill="currentColor" class="bi bi-journal-bookmark-fill"
@@ -153,7 +150,7 @@
                                                 <a *ngIf="isDocente" style="color: tomato;" (click)="enviarId(docDocente.idDocumentosDocente)"
                                                     href="/listarDocEstudiante">{{docDocente.nombreActividad}}</a>
                                             </td>
-                                            <td id="botones" *ngIf="editar" WIDTH="40%">
+                                            <td id="botones" *ngIf="docDocente.tema.idTema == tema.idTema && editar" WIDTH="40%">
                                                 <button (click)="EditarDocDocente(docDocente.idDocumentosDocente)"
                                                     class="btn btn-outline-dark">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -186,8 +183,7 @@
                                                             d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                                                     </svg>
                                                 </button>
-                                            </td>
-                                        </div>
+                                            </td>                                        
                                     </tr>
                                 </tbody>
                             </table>
@@ -198,7 +194,7 @@
         </div>
     </div>
 
-    <button *ngIf="editar && selectTema" class="btn btn-outline-success" (click)="agregarDocDocente()">
+    <button style="margin-left: 47%;" *ngIf="editar && selectTema" class="btn btn-outline-success" (click)="agregarDocDocente()">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle"
             viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
