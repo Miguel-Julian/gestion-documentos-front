@@ -19,6 +19,7 @@ export class IndexComponent implements OnInit {
 
   imgInicio: string = 'assets/Bienvenida.jpg';
   nombreUsuario: string = '';
+  nombreCompletoUsuario: string = '';
   isLogged = false;
   asignacionesDocente: AsignacionDocente[] = [];
   materias: Materia[] = [];
@@ -47,6 +48,7 @@ export class IndexComponent implements OnInit {
       this.estudianteService.listar().subscribe(students => {
         students.forEach(student => {
           if (student.usuario.nombreUsuario == this.nombreUsuario) {
+            this.nombreCompletoUsuario = student.nombreEstudiante + " " + student.apellidoEstudiante;
             this.asignacionDocenteService.listar().subscribe(res => {
               res.forEach(element => {
                 if (student.curso.idCurso == element.curso.idCurso) {
@@ -63,6 +65,7 @@ export class IndexComponent implements OnInit {
       this.doceteService.listar().subscribe(data => {
         data.forEach(profe => {
           if (profe.usuario.nombreUsuario == this.nombreUsuario) {
+            this.nombreCompletoUsuario = profe.nombreDocente + " " + profe.apellidoDocente;
             this.asignacionDocenteService.listarPorDocente(profe.idDocente).subscribe(res => {
               this.asignacionesDocente = res;
               res.forEach(element => {

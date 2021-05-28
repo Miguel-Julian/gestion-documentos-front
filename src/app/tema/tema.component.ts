@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Curso } from '../Modelo/curso';
 import { DocumentosDocente } from '../Modelo/documentos-docente';
+import { Materia } from '../Modelo/materia';
 import { Tema } from '../Modelo/tema';
 import { AsignacionDocenteService } from '../Service/asignacion-docente.service';
+import { CursoService } from '../Service/curso.service';
 import { DocumentosDocenteService } from '../Service/documentos-docente.service';
+import { MateriaService } from '../Service/materia.service';
 import { TemaService } from '../Service/tema.service';
 import { TokenService } from '../Service/token.service';
 
@@ -27,15 +31,24 @@ export class TemaComponent implements OnInit {
   selectTema: boolean = false;
   documentosDocenteActivos: DocumentosDocente[] = [];
   documentosDocenteInactivos: DocumentosDocente[] = [];
+  materia:Materia = new Materia();
+  curso:Curso = new Curso();
 
   constructor(private tokenService: TokenService, private temaService: TemaService,
-    private asignacionDocenteService: AsignacionDocenteService,
-    private docDocenteService: DocumentosDocenteService, private router: Router) { }
+    private asignacionDocenteService: AsignacionDocenteService, private materiaService: MateriaService,
+    private docDocenteService: DocumentosDocenteService, private router: Router,
+    private cursoService:CursoService) { }
 
   ngOnInit(): void {
     if (this.tokenService.getToken()) {
       this.isLogged = true;
       this.roles = this.tokenService.getAuthorities();
+      this.materiaService.consultar(this.temaService.getIdMateria()).subscribe(mat =>{
+        this.materia = mat;
+      });
+      this.cursoService.consultar(this.temaService.getIdCurso()).subscribe(cur =>{
+        this.curso = cur;
+      });
       if (this.roles[0] == 'ROLE_DOCENTE') {
         this.isDocente = true;
       } else if (this.roles[0] == 'ROLE_ESTUDIANTE') {
@@ -53,7 +66,9 @@ export class TemaComponent implements OnInit {
         this.temasAll.push(tem);
         this.docDocenteService.listar(tem.idTema.toString()).subscribe(docs => {
           docs.forEach(doc => {
-            if (doc.estado) {
+            var fecha:Date = new Date(doc.fechaLimite)
+            doc.descripcionActividad = this.fecha(fecha);
+            if (doc.estado) {              
               this.documentosDocenteActivos.push(doc);
             } else {
               this.documentosDocenteInactivos.push(doc);
@@ -70,6 +85,8 @@ export class TemaComponent implements OnInit {
           this.temasAll.push(temIn);
           this.docDocenteService.listar(temIn.idTema.toString()).subscribe(docs => {
             docs.forEach(doc => {
+              var fecha:Date = new Date(doc.fechaLimite)
+              doc.descripcionActividad = this.fecha(fecha);
               if (doc.estado) {
                 this.documentosDocenteActivos.push(doc);
               } else {
@@ -217,5 +234,45 @@ export class TemaComponent implements OnInit {
   EditarDocDocente(id: number): void {
     localStorage.setItem("idDocDocente", id.toString());
     this.router.navigate(["addDocDocente"]);
+  }
+
+  mes(mes: number) {
+    var mesNombre: string = '';
+    if (mes == 0) { mesNombre = "Enero"; }
+    else if (mes == 1) { mesNombre = "Febrero"; }
+    else if (mes == 2) { mesNombre = "Marzo"; }
+    else if (mes == 3) { mesNombre = "Abril"; }
+    else if (mes == 4) { mesNombre = "Mayo"; }
+    else if (mes == 5) { mesNombre = "Junio"; }
+    else if (mes == 6) { mesNombre = "Julio"; }
+    else if (mes == 7) { mesNombre = "Agosto"; }
+    else if (mes == 8) { mesNombre = "Septiembre"; }
+    else if (mes == 9) { mesNombre = "Octubre"; }
+    else if (mes == 10) { mesNombre = "Noviembre"; }
+    else { mesNombre = "Diciembre"; }
+    return mesNombre;
+  }
+  dia(dia: number) {
+    var diaNombre: string = '';
+    if (dia == 0) { diaNombre = "Domingo"; }
+    else if (dia == 1) { diaNombre = "Lunes"; }
+    else if (dia == 2) { diaNombre = "Martes"; }
+    else if (dia == 3) { diaNombre = "Miercoles"; }
+    else if (dia == 4) { diaNombre = "Jueves"; }
+    else if (dia == 5) { diaNombre = "Viernes"; }
+    else { diaNombre = "Sabado"; }
+    return diaNombre;
+  }
+
+  fecha(fecha: Date):string {
+    var hora: string = fecha.getHours() + "";
+    var minutos: string = fecha.getMinutes() + "";
+    var seg: string = fecha.getSeconds() + "";
+    console.log(hora + minutos + seg)
+    if (Number(hora) < 10) { hora = "0" + fecha.getHours() }
+    if (Number(minutos) < 10) { minutos = "0" + fecha.getMinutes() }
+    if (Number(seg) < 10) { seg = "0" + fecha.getSeconds() }
+    console.log(hora + minutos + seg)
+    return this.dia(fecha.getDay()) + ", " + fecha.getDate() + " de " + this.mes(fecha.getMonth()) + " de " + fecha.getFullYear() + ", " + hora + ":" + minutos + ":" + seg;
   }
 }

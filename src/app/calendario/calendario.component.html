@@ -1,7 +1,8 @@
 <app-menu></app-menu>
-<div class="container">
-    <div class="card-body">
-        <button (click)="toggleWeekends()">toggle weekends</button>
-        <full-calendar [options]="calendarOptions"></full-calendar>
+<div *ngIf="isLogged">
+    <div class="container">
+        <div class="text-center">
+            <full-calendar [options]="options"></full-calendar>
+        </div>
     </div>
 </div>

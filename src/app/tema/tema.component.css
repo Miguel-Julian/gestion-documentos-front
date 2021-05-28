@@ -24,5 +24,12 @@
     display:inline-block;    
 }
 
-
+.main{
+    background-image: url(../../assets/Fondo.png);    
+    background-size: 100%;
+    overflow: hidden;
+    height: 116vh;
+    background-position: 0 0;
+    background-repeat: repeat-x;
+}
 
